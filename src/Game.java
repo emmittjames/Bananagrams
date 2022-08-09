@@ -4,28 +4,37 @@ public class Game {
 	
 	private Board board;
 	private Scanner sc;
+	private Letters lets;
 	
 	public Game() {
 		board = new Board();
 		sc = new Scanner(System.in);
+		lets = new Letters();
 	}
 	
 	public void playGame() {
 		while(true) {
-			board.printBoard();
-			System.out.print("Enter letter or type 0 to move a piece: ");
-			char c = sc.next().charAt(0);
-			if(c=='0') {
+			board.printBoard(lets);
+			System.out.print("Enter letter of a piece to play it or type 0 to move a piece: ");
+			String in = sc.next().toUpperCase();
+			char c = in.charAt(0);
+			if(in.length()==1) {
+				c = in.charAt(0);
+			}
+			else if(c=='0') {
 				movePiece();
 			}
-			else {
+			else if(c>=65 && c<=90) {
 				playPiece(c);
+			}
+			else {
+				System.out.println("Invalid entry");
 			}
 		}
 	}
 	
-	public void movePiece() {
-		System.out.print("Enter x coordinate to move a piece or type 0 to play a piece: ");
+	public void movePiece() {	//under construction
+		
 	}
 	
 	public void playPiece(char c) {

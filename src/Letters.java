@@ -6,7 +6,8 @@ public class Letters {
 	private ArrayList<Character> currLetters = new ArrayList<Character>();
 	
 	public Letters() {
-		String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
+		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
+		String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";	//smaller letter pool for testing
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -24,17 +25,22 @@ public class Letters {
 		return false;
 	}
 	
-	public boolean dump(char c) {
+	public boolean dump(char c) {		//Under construction
 		if(currLetters.size()>3) {
 			peel();
 			peel();
 			peel();
 			letterPool.add(c);
 		}
+		return true;
 	}
 	
-	public int getPool() {
-		return letterPool.size();
+	public ArrayList<Character> getPool() {
+		return letterPool;
+	}
+	
+	public ArrayList<Character> getLets() {
+		return currLetters;
 	}
 	
 	public void startingLetters(int amount) {		//distributes 21 letters into currLetters
@@ -42,7 +48,7 @@ public class Letters {
 			int rand = (int)(Math.random()*letterPool.size());
 			currLetters.add(letterPool.remove(rand));
 		}
-		System.out.println(currLetters);
-		System.out.println(letterPool);
+		//System.out.println(currLetters);
+		//System.out.println(letterPool);
 	}
 }

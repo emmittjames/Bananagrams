@@ -58,8 +58,6 @@ public class Board {
 	}
 	
 	
-	
-	
 	//=============================================================================================================
 	
 	
@@ -102,12 +100,19 @@ public class Board {
 		}
 	}
 	
-	public void printBoard() {
+	public void printBoard(Letters lets) {
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {
 				System.out.print(board[i][j]);
 			}
 			System.out.print('\n');
+		}
+		System.out.print("Current letters: ");
+		if(lets.getLets().size()>=1) {
+			for(int i=0;i<lets.getLets().size()-1;i++) {
+				System.out.print(lets.getLets().get(i)+ ", ");					//prints the current letters
+			}
+			System.out.println(lets.getLets().get(lets.getLets().size()-1));
 		}
 	}
 }

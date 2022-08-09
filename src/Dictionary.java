@@ -9,7 +9,7 @@ public class Dictionary {
 		dictionary = new Hashtable<String,String>();
 		try {
 			File f = new File("words.txt");
-			String path = f.getAbsolutePath();
+			String path = f.getAbsolutePath();	
 			BufferedReader in = new BufferedReader(new FileReader(path));
 			String line;
 			while((line = in.readLine())!=null) {
