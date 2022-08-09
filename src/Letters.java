@@ -7,22 +7,37 @@ public class Letters {
 	
 	public Letters() {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
-		String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";	//smaller letter pool for testing
+		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";	//smaller letter pool for testing
+		String str = "ABCDEFG";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
 		startingLetters(21);
 	}
 	
-	public boolean peel() {
-		if(currLetters.size()>0) {
-			int rand = (int)(Math.random()*letterPool.size());
-			currLetters.add(letterPool.remove(rand));
-			if(letterPool.size()>0) {
-				return true;
+	public void play(char c) {
+		for(int i=0;i<currLetters.size();i++) {
+			if(currLetters.get(i)==c) {
+				currLetters.remove(i);
+				return;
 			}
 		}
+	}
+	
+	public boolean check() {		//checks gameover or peel;
+		if(currLetters.size()==0) {
+			if(letterPool.size()<1) {		//< # of players for gameover
+				return true;
+			}
+			peel();
+			System.out.println("PEEL!");
+		}
 		return false;
+	}
+	
+	public void peel() {
+		int rand = (int)(Math.random()*letterPool.size());
+		currLetters.add(letterPool.remove(rand));
 	}
 	
 	public boolean dump(char c) {		//Under construction
@@ -50,5 +65,13 @@ public class Letters {
 		}
 		//System.out.println(currLetters);
 		//System.out.println(letterPool);
+	}
+	
+	public boolean valid(char c) {
+		for(char x:currLetters) {
+			if(x==c)
+				return true;
+		}
+		return false;
 	}
 }

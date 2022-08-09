@@ -18,14 +18,14 @@ public class Game {
 			System.out.print("Enter letter of a piece to play it or type 0 to move a piece: ");
 			String in = sc.next().toUpperCase();
 			char c = in.charAt(0);
-			if(in.length()==1) {
-				c = in.charAt(0);
-			}
-			else if(c=='0') {
+			if(c=='0') {
 				movePiece();
 			}
 			else if(c>=65 && c<=90) {
 				playPiece(c);
+				if(lets.check()) {	//checks for gameover or peel
+					endGame();
+				}
 			}
 			else {
 				System.out.println("Invalid entry");
@@ -42,8 +42,16 @@ public class Game {
 		int xCord = sc.nextInt();
 		System.out.print("Enter y coordinate: ");
 		int yCord = sc.nextInt();
-		if(!board.play(xCord,yCord,c)) {
+		if(lets.valid(c) && board.play(xCord,yCord,c)) {
+			lets.play(c);
+		}
+		else {
 			System.out.println("Invalid Move");
 		}
+	}
+	
+	public void endGame() {	//under construction
+		//check every piece on board and call get right/down
+		System.out.println("game over");
 	}
 }
