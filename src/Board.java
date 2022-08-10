@@ -21,7 +21,21 @@ public class Board {
 		return false;
 	}
 	
-	public boolean checkWord(int xCord, int yCord, char c) {	//checks if the letter makes words with surrounding letters
+	public boolean checkValidWords() {
+		System.out.println("test");
+		for(int i=2;i<board.length-2;i++) {
+			for(int j=2;j<board[0].length-2;j++) {
+				if(board[i][j]!=' ') {
+					if(!checkWord(j,i)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean checkWord(int xCord, int yCord) {	//checks if the letter makes words with surrounding letters
 		Dictionary dic = new Dictionary();
 		
 		String down = getDown(xCord,yCord);

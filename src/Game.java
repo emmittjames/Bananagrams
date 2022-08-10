@@ -3,8 +3,8 @@ import java.util.*;
 public class Game {
 	
 	private Board board;
-	private Scanner sc;
 	private Letters lets;
+	private Scanner sc;
 	
 	public Game() {
 		board = new Board();
@@ -24,7 +24,8 @@ public class Game {
 			else if(c>=65 && c<=90) {
 				playPiece(c);
 				if(lets.check()) {	//checks for gameover or peel
-					endGame();
+					gameOver();
+					break;
 				}
 			}
 			else {
@@ -50,8 +51,13 @@ public class Game {
 		}
 	}
 	
-	public void endGame() {	//under construction
-		//check every piece on board and call get right/down
-		System.out.println("game over");
+	public void gameOver() {
+		board.printBoard(lets);
+		if(board.checkValidWords()) {
+			System.out.println("You won!");
+		}
+		else {
+			System.out.println("You lost");
+		}
 	}
 }

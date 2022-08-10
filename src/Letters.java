@@ -12,7 +12,8 @@ public class Letters {
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
-		startingLetters(21);
+		//startingLetters(21);
+		startingLetters(3);
 	}
 	
 	public void play(char c) {
