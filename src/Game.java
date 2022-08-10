@@ -17,11 +17,15 @@ public class Game {
 			board.printBoard(lets);
 			System.out.print("Enter letter of a piece to play it or type 0 to move a piece: ");
 			String in = sc.next().toUpperCase();
+			while(in.length()!=1) {
+				System.out.println("Please enter a single character");
+				in = sc.next().toUpperCase();
+			}
 			char c = in.charAt(0);
 			if(c=='0') {
 				movePiece();
 			}
-			else if(c>=65 && c<=90) {
+			else if(lets.hasLetter(c)) {
 				playPiece(c);
 				if(lets.check()) {	//checks for gameover or peel
 					gameOver();
@@ -35,15 +39,23 @@ public class Game {
 	}
 	
 	public void movePiece() {	//under construction
-		
+		System.out.print("move piece");
 	}
 	
 	public void playPiece(char c) {
 		System.out.print("Enter x coordinate: ");
+		while(!sc.hasNextInt()) {
+			sc.next();
+			System.out.println("Please enter an integer");
+		}
 		int xCord = sc.nextInt();
 		System.out.print("Enter y coordinate: ");
+		while(!sc.hasNextInt()) {
+			sc.next();
+			System.out.println("Please enter an integer");
+		}
 		int yCord = sc.nextInt();
-		if(lets.valid(c) && board.play(xCord,yCord,c)) {
+		if(board.play(xCord,yCord,c)) {
 			lets.play(c);
 		}
 		else {

@@ -9,7 +9,7 @@ public class Board {
 	}
 	
 	public boolean play(int xCord, int yCord, char c) {
-		if(xCord>board.length-3 || yCord>board[0].length-3) {
+		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {
 			return false;
 		}
 		c = Character.toUpperCase(c);

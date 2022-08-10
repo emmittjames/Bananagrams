@@ -6,9 +6,7 @@ public class Main {
 	}
 }
 
-
 //TODO:
 //make movePiece
 //make dump
-//Count freestanding letters as an invalid move
-//Try catch for error producing inputs
+//Try catch for error producing inputs (strings for dimension, etc.)

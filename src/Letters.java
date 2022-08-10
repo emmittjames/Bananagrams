@@ -68,7 +68,7 @@ public class Letters {
 		//System.out.println(letterPool);
 	}
 	
-	public boolean valid(char c) {
+	public boolean hasLetter(char c) {
 		for(char x:currLetters) {
 			if(x==c)
 				return true;
