@@ -10,5 +10,5 @@ public class Main {
 //TODO:
 //make movePiece
 //make dump
-//check letters when game is over
 //Count freestanding letters as an invalid move
+//Try catch for error producing inputs

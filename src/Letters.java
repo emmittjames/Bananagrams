@@ -36,7 +36,7 @@ public class Letters {
 		return false;
 	}
 	
-	public void peel() {
+	private void peel() {
 		int rand = (int)(Math.random()*letterPool.size());
 		currLetters.add(letterPool.remove(rand));
 	}
@@ -59,7 +59,7 @@ public class Letters {
 		return currLetters;
 	}
 	
-	public void startingLetters(int amount) {		//distributes 21 letters into currLetters
+	private void startingLetters(int amount) {		//distributes 21 letters into currLetters
 		for(int i=0;i<amount;i++) {
 			int rand = (int)(Math.random()*letterPool.size());
 			currLetters.add(letterPool.remove(rand));

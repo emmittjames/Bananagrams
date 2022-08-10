@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Board {
 	
 	private char[][] board;
@@ -11,18 +9,43 @@ public class Board {
 	}
 	
 	public boolean play(int xCord, int yCord, char c) {
+		if(xCord>board.length-3 || yCord>board[0].length-3) {
+			return false;
+		}
 		c = Character.toUpperCase(c);
 		yCord = yCord+2;
 		xCord = xCord+2;
 		if(board[yCord][xCord] == ' ') {
-			board[yCord][xCord] = c;
+			if(checkAdjacent(xCord,yCord)) {
+				board[yCord][xCord] = c;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean checkAdjacent(int xCord, int yCord) {		//checks adjacent letters or if the board is empty (first move)
+		if(empty()){
+			return true;
+		}
+		if((board[yCord+1][xCord]>=65 && board[yCord+1][xCord]<=90) || (board[yCord-1][xCord]>=65 && board[yCord-1][xCord]<=90) || (board[yCord][xCord+1]>=65 && board[yCord][xCord+1]<=90) || (board[yCord][xCord-1]>=65 && board[yCord][xCord-1]<=90)) {
 			return true;
 		}
 		return false;
 	}
 	
+	private boolean empty() {
+		for(int i=2;i<board.length-2;i++) {
+			for(int j=2;j<board[0].length-2;j++) {
+				if(board[i][j]!=' ') {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public boolean checkValidWords() {
-		System.out.println("test");
 		for(int i=2;i<board.length-2;i++) {
 			for(int j=2;j<board[0].length-2;j++) {
 				if(board[i][j]!=' ') {
@@ -35,11 +58,11 @@ public class Board {
 		return true;
 	}
 	
-	public boolean checkWord(int xCord, int yCord) {	//checks if the letter makes words with surrounding letters
+	private boolean checkWord(int xCord, int yCord) {	//checks if the letter makes words with surrounding letters
 		Dictionary dic = new Dictionary();
 		
-		String down = getDown(xCord,yCord);
-		String right = getRight(xCord,yCord);
+		String down = getVert(xCord,yCord);
+		String right = getHoriz(xCord,yCord);
 		
 		if(dic.isWord(down) && dic.isWord(right)) {
 			return true;
@@ -47,7 +70,7 @@ public class Board {
 		return false;
 	}
 	
-	public String getDown(int xCord, int yCord) {
+	private String getVert(int xCord, int yCord) {		//get any vertical word given the coordinates of any letter in the word
 		String str = "";
 		while(board[yCord-1][xCord]>= 65 && board[yCord-1][xCord]<=90){		//goes to the first letter (all the way up) of the word to check the entire word
 			yCord--;
@@ -59,7 +82,7 @@ public class Board {
 		return str;
 	}
 	
-	public String getRight(int xCord, int yCord) {
+	private String getHoriz(int xCord, int yCord) {		//gets any horizontal word given the coordinates of any letter in the word
 		String str = "";
 		while(board[yCord][xCord-1]>= 65 && board[yCord][xCord-1]<=90){		//goes to the first letter (all the way left) in the word to check the entire word
 			xCord--;
@@ -71,11 +94,7 @@ public class Board {
 		return str;
 	}
 	
-	
-	//=============================================================================================================
-	
-	
-	public void fillWithBlanks() {		//fills entire board with blanks chars
+	private void fillWithBlanks() {		//fills entire board with blanks chars
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {
 				board[i][j] = ' ';
@@ -83,7 +102,7 @@ public class Board {
 		}
 	}
 	
-	public void fillEdges() {
+	private void fillEdges() {
 		int yVal = 1;
 		for(int i=0;i<2;i++) {		//puts north and south side border
 			for(int j=1;j<board[0].length;j++) {
