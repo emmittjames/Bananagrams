@@ -8,16 +8,15 @@ public class Board {
 		fillEdges();
 	}
 	
-	public boolean play(int xCord, int yCord, char c) {
-		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {
-
+	public boolean play(int xCord, int yCord, char c) {		//plays a piece on the board
+		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
 			return false;
 		}
 		c = Character.toUpperCase(c);
 		yCord = yCord+2;
 		xCord = xCord+2;
-		if(board[yCord][xCord] == ' ') {
-			if(checkAdjacent(xCord,yCord)) {
+		if(board[yCord][xCord] == ' ') {		//makes sure move is on an unoccupied space
+			if(checkAdjacent(xCord,yCord)) {	//makes sure move is connected to other pieces (except for the first move)
 				board[yCord][xCord] = c;
 				return true;
 			}
@@ -35,7 +34,7 @@ public class Board {
 		return false;
 	}
 	
-	private boolean empty() {
+	private boolean empty() {				//returns true if board is empty
 		for(int i=2;i<board.length-2;i++) {
 			for(int j=2;j<board[0].length-2;j++) {
 				if(board[i][j]!=' ') {
@@ -46,7 +45,7 @@ public class Board {
 		return true;
 	}
 	
-	public boolean checkValidWords() {
+	public boolean checkValidWords() {		//checks if all words on the board are valid
 		for(int i=2;i<board.length-2;i++) {
 			for(int j=2;j<board[0].length-2;j++) {
 				if(board[i][j]!=' ') {
@@ -61,10 +60,8 @@ public class Board {
 	
 	private boolean checkWord(int xCord, int yCord) {	//checks if the letter makes words with surrounding letters
 		Dictionary dic = new Dictionary();
-		
 		String down = getVert(xCord,yCord);
 		String right = getHoriz(xCord,yCord);
-		
 		if(dic.isWord(down) && dic.isWord(right)) {
 			return true;
 		}
@@ -103,7 +100,7 @@ public class Board {
 		}
 	}
 	
-	private void fillEdges() {
+	private void fillEdges() {		//puts the edges on the borders of the board
 		int yVal = 1;
 		for(int i=0;i<2;i++) {		//puts north and south side border
 			for(int j=1;j<board[0].length;j++) {
@@ -134,17 +131,21 @@ public class Board {
 		}
 	}
 	
-	public void printBoard(Letters lets) {
+	public int getDimensions() {
+		return board.length-3;
+	}
+	
+	public void printBoard(Letters lets) {		//prints the board along with the current letters underneath
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {
-				System.out.print(board[i][j]);
+				System.out.print(board[i][j]);		//prints the board
 			}
 			System.out.print('\n');
 		}
 		System.out.print("Current letters: ");
 		if(lets.getLets().size()>=1) {
 			for(int i=0;i<lets.getLets().size()-1;i++) {
-				System.out.print(lets.getLets().get(i)+ ", ");					//prints the current letters
+				System.out.print(lets.getLets().get(i)+ ", ");			//prints the current letters
 			}
 			System.out.println(lets.getLets().get(lets.getLets().size()-1));
 		}

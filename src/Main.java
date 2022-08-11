@@ -9,4 +9,4 @@ public class Main {
 //TODO:
 //make movePiece
 //make dump
-//Expand board to 15x15
+//Allow user to select different move

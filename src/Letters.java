@@ -41,9 +41,9 @@ public class Letters {
 		currLetters.add(letterPool.remove(rand));
 	}
 	
-	public boolean dump(char c) {		//Under construction
+	public boolean dump(char c) {		//dump function which puts a desired letter back into the pool but makes the player take 3 more
 		if(currLetters.size()>3) {
-			peel();
+			peel();						//under construction
 			peel();
 			peel();
 			letterPool.add(c);
@@ -59,7 +59,7 @@ public class Letters {
 		return currLetters;
 	}
 	
-	private void startingLetters(int amount) {		//distributes 21 letters into currLetters
+	private void startingLetters(int amount) {		//distributes [amount] of letters into currLetters
 		for(int i=0;i<amount;i++) {
 			int rand = (int)(Math.random()*letterPool.size());
 			currLetters.add(letterPool.remove(rand));
@@ -68,7 +68,7 @@ public class Letters {
 		//System.out.println(letterPool);
 	}
 	
-	public boolean hasLetter(char c) {
+	public boolean hasLetter(char c) {		//returns true if currLetters contains c
 		for(char x:currLetters) {
 			if(x==c)
 				return true;
