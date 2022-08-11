@@ -9,4 +9,4 @@ public class Main {
 //TODO:
 //make movePiece
 //make dump
-//Try catch for error producing inputs (strings for dimension, etc.)
+//Expand board to 15x15

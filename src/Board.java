@@ -3,13 +3,14 @@ public class Board {
 	private char[][] board;
 	
 	public Board() {
-		board = new char[13][13];	//Board is 10x10 with an extra space for edges and numbers
+		board = new char[18][18];	//Board is 10x10 with an extra space for edges and numbers
 		fillWithBlanks();
 		fillEdges();
 	}
 	
 	public boolean play(int xCord, int yCord, char c) {
 		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {
+
 			return false;
 		}
 		c = Character.toUpperCase(c);
@@ -113,7 +114,7 @@ public class Board {
 					board[yVal][j] = '-';
 				}
 			}
-			yVal = 12;
+			yVal = board.length-1;
 		}
 
 		int xVal = 1;
@@ -121,7 +122,7 @@ public class Board {
 			for(int j=2;j<board.length-1;j++) {
 					board[j][xVal] = '|';
 			}
-			xVal = 12;
+			xVal = board.length-1;
 		}
 		
 		for(int i=2;i<board[0].length-1;i++) {	//puts numbers on north side

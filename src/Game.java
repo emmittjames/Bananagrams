@@ -43,13 +43,13 @@ public class Game {
 	}
 	
 	public void playPiece(char c) {
-		System.out.print("Enter x coordinate: ");
+		System.out.print("Enter x coordinate: ");		//x coordinate
 		while(!sc.hasNextInt()) {
 			sc.next();
 			System.out.println("Please enter an integer");
 		}
 		int xCord = sc.nextInt();
-		System.out.print("Enter y coordinate: ");
+		System.out.print("Enter y coordinate: ");		//y coordinate
 		while(!sc.hasNextInt()) {
 			sc.next();
 			System.out.println("Please enter an integer");
@@ -66,7 +66,7 @@ public class Game {
 	public void gameOver() {
 		board.printBoard(lets);
 		if(board.checkValidWords()) {
-			System.out.println("You won!");
+			System.out.println("You won!");		//wins if all words are valid loss if any invalid words
 		}
 		else {
 			System.out.println("You lost");
