@@ -9,4 +9,4 @@ public class Main {
 //TODO:
 //make movePiece
 //make dump
-//Allow user to select different move
+//let user place tiles wherever they want but make sure everything is connected at the end

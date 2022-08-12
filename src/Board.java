@@ -3,19 +3,19 @@ public class Board {
 	private char[][] board;
 	
 	public Board() {
-		board = new char[18][18];	//Board is 10x10 with an extra space for edges and numbers
+		board = new char[18][18];	//Board is 15x15 with an extra space for edges and numbers
 		fillWithBlanks();
 		fillEdges();
 	}
 	
 	public boolean play(int xCord, int yCord, char c) {		//plays a piece on the board
-		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
+		if(xCord>=board.length-3 || yCord>=board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
 			System.out.println("Invalid move - coordinates are not on the board");
 			return false;
 		}
 		c = Character.toUpperCase(c);
-		yCord = yCord+2;
-		xCord = xCord+2;
+		yCord+=2;		//Dilutes coords so they can be used with the board
+		xCord+=2;
 		if(board[yCord][xCord] == ' ') {		//makes sure move is on an unoccupied space
 			if(checkAdjacent(xCord,yCord)) {	//makes sure move is connected to other pieces (except for the first move)
 				board[yCord][xCord] = c;
@@ -29,6 +29,49 @@ public class Board {
 			System.out.println("Invalid move - space already taken");
 		}
 		return false;
+	}
+	
+	public void move(int xCordOld, int yCordOld, int xCordNew, int yCordNew) {		//moves letter from old coords to new coords
+		xCordOld+=2;	//Dilutes coords so they can be used with the board
+		yCordOld+=2;
+		xCordNew+=2;
+		yCordNew+=2;
+		
+		char c = board[yCordOld][xCordOld];
+		board[yCordOld][xCordOld] = ' ';
+		board[yCordNew][xCordNew] = c;
+	}
+	
+	public boolean checkOld(int xCord, int yCord) {		//checks if the oldCoords in move are valid   //0=valid 1=invalid 2=change move
+		if(xCord>=board.length-3 || yCord>=board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
+			System.out.println("Invalid move - old coordinates are not on the board");
+			return false;
+		}
+		yCord+=2;		//Dilutes coords so they can be used with the board
+		xCord+=2;
+		if(board[yCord][xCord] != ' ') {		//makes sure move is on a space with a letter
+		}
+		else {
+			System.out.println("Invalid move - space is empty");
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean checkNew(int xCord, int yCord) {		//checks if the newCoords in move are valid
+		if(xCord>=board.length-3 || yCord>=board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
+			System.out.println("Invalid move - new coordinates are not on the board");
+			return false;
+		}
+		yCord+=2;		//Dilutes coords so they can be used with the board
+		xCord+=2;
+		if(board[yCord][xCord] == ' ') {		//makes sure move is on an empty space
+		}
+		else {
+			System.out.println("Invalid move - space is taken");
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean checkAdjacent(int xCord, int yCord) {		//checks adjacent letters or if the board is empty (first move)

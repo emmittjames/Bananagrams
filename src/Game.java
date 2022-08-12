@@ -38,10 +38,26 @@ public class Game {
 	}
 	
 	private void movePiece() {	//under construction
-		/*int[] coords = getCoords();
-		if(!board.move(coords[0],coords[1])) {
-			System.out.println("Invalid Move");
-		}*/
+		System.out.println("Which letter would you like to move?");
+		int[] coordsOld = getCoords();
+		if(coordsOld[0]==-1)		////if user types -1 allows user to re-pick move
+			return;
+		while(!board.checkOld(coordsOld[0],coordsOld[1])) {
+			coordsOld = getCoords();
+			if(coordsOld[0]==-1)		////if user types -1 allows user to re-pick move
+				return;
+		}
+		
+		System.out.println("Where would you like to move it?");
+		int[] coordsNew = getCoords();
+		if(coordsNew[0]==-1)		////if user types -1 allows user to re-pick move
+			return;
+		while(!board.checkNew(coordsNew[0],coordsNew[1])) {
+			coordsNew = getCoords();
+			if(coordsNew[0]==-1)		////if user types -1 allows user to re-pick move
+				return;
+		}
+		board.move(coordsOld[0], coordsOld[1], coordsNew[0], coordsNew[1]);
 	}
 	
 	private void playPiece(char c) {		//plays a piece on the board
@@ -49,7 +65,6 @@ public class Game {
 		if(coords[0]==-1)
 			return;
 		while(!board.play(coords[0],coords[1],c)) {
-			//System.out.println("Invalid Move");
 			coords = getCoords();
 			if(coords[0]==-1)		////if user types -1 allows user to re-pick move
 				return;
