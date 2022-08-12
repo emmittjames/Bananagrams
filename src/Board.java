@@ -10,6 +10,7 @@ public class Board {
 	
 	public boolean play(int xCord, int yCord, char c) {		//plays a piece on the board
 		if(xCord>board.length-3 || yCord>board[0].length-3 || xCord<0 || yCord<0) {		//ensures coordinates are on the board
+			System.out.println("Invalid move - coordinates are not on the board");
 			return false;
 		}
 		c = Character.toUpperCase(c);
@@ -20,6 +21,12 @@ public class Board {
 				board[yCord][xCord] = c;
 				return true;
 			}
+			else {
+				System.out.println("Invalid move - place letter next to another letter");
+			}
+		}
+		else {
+			System.out.println("Invalid move - space already taken");
 		}
 		return false;
 	}

@@ -49,7 +49,7 @@ public class Game {
 		if(coords[0]==-1)
 			return;
 		while(!board.play(coords[0],coords[1],c)) {
-			System.out.println("Invalid Move");
+			//System.out.println("Invalid Move");
 			coords = getCoords();
 			if(coords[0]==-1)		////if user types -1 allows user to re-pick move
 				return;
