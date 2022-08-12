@@ -17,17 +17,10 @@ public class Board {
 		yCord+=2;		//Dilutes coords so they can be used with the board
 		xCord+=2;
 		if(board[yCord][xCord] == ' ') {		//makes sure move is on an unoccupied space
-			if(checkAdjacent(xCord,yCord)) {	//makes sure move is connected to other pieces (except for the first move)
-				board[yCord][xCord] = c;
-				return true;
-			}
-			else {
-				System.out.println("Invalid move - place letter next to another letter");
-			}
+			board[yCord][xCord] = c;
+			return true;
 		}
-		else {
-			System.out.println("Invalid move - space already taken");
-		}
+		System.out.println("Invalid move - space already taken");
 		return false;
 	}
 	
@@ -74,25 +67,24 @@ public class Board {
 		return true;
 	}
 	
-	private boolean checkAdjacent(int xCord, int yCord) {		//checks adjacent letters or if the board is empty (first move)
-		if(empty()){
-			return true;
-		}
-		if((board[yCord+1][xCord]>=65 && board[yCord+1][xCord]<=90) || (board[yCord-1][xCord]>=65 && board[yCord-1][xCord]<=90) || (board[yCord][xCord+1]>=65 && board[yCord][xCord+1]<=90) || (board[yCord][xCord-1]>=65 && board[yCord][xCord-1]<=90)) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean empty() {				//returns true if board is empty
+	public boolean checkConnected() {	//checks if letter is connected to any other letters
 		for(int i=2;i<board.length-2;i++) {
 			for(int j=2;j<board[0].length-2;j++) {
 				if(board[i][j]!=' ') {
-					return false;
+					if(!checkAdjacent(j,i)) {
+						return false;
+					}
 				}
 			}
 		}
 		return true;
+	}
+	
+	private boolean checkAdjacent(int xCord, int yCord) {		//checks for any adjacent letter
+		if((board[yCord+1][xCord]>=65 && board[yCord+1][xCord]<=90) || (board[yCord-1][xCord]>=65 && board[yCord-1][xCord]<=90) || (board[yCord][xCord+1]>=65 && board[yCord][xCord+1]<=90) || (board[yCord][xCord-1]>=65 && board[yCord][xCord-1]<=90)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean checkValidWords() {		//checks if all words on the board are valid
@@ -145,7 +137,7 @@ public class Board {
 	private void fillWithBlanks() {		//fills entire board with blanks chars
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {
-				board[i][j] = ' ';
+				board[j][i] = ' ';
 			}
 		}
 	}

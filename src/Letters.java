@@ -8,7 +8,7 @@ public class Letters {
 	public Letters() {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";	//smaller letter pool for testing
-		String str = "ABCDEFG";
+		String str = "HELLO";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}

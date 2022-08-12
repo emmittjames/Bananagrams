@@ -99,11 +99,11 @@ public class Game {
 	
 	private void gameOver() {		//game over function
 		board.printBoard(lets);
-		if(board.checkValidWords()) {
-			System.out.println("You won!");		//wins if all words are valid loss if any invalid words
+		if(board.checkConnected() && board.checkValidWords()) {		//checks if all letters are connected and if every word formed is a real word
+			System.out.println("\nYou won!");	
 		}
 		else {
-			System.out.println("You lost");
+			System.out.println("\nYou lost");
 		}
 	}
 }
