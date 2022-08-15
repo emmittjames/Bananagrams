@@ -42,6 +42,9 @@ public class Game {
 		else if(c=='0') {	//move piece
 			movePiece();
 		}
+		else if(c=='1') {	//dump
+			dump();
+		}
 		else if(lets.hasLetter(c)) {
 			playPiece(c);
 		}
@@ -49,6 +52,25 @@ public class Game {
 			System.out.println("Invalid entry");
 		}
 		playGame();		//makes method repeat itself over and over until game over
+	}
+	
+	private void dump() {
+		System.out.println("Type a letter to dump it or type -1 to select a different move");
+		String in = sc.next().toUpperCase();
+		while(in.length()!=1 && !in.equals("-1")) {
+			System.out.println("Please enter a single character");
+			in = sc.next().toUpperCase();
+		}
+		char c = in.charAt(0);
+		if(in.equals("-1")) {
+			return;
+		}
+		else if(lets.hasLetter(c)) {
+			lets.dump(c);
+		}
+		else {
+			System.out.println("Invalid entry");
+		}
 	}
 	
 	private void movePiece() {	//under construction

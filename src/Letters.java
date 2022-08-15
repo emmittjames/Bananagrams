@@ -7,8 +7,9 @@ public class Letters {
 	
 	public Letters() {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
-		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";	//smaller letter pool for testing
-		String str = "HELLO";
+		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
+		//String str = "HELLO";
+		String str = "ABCDEFGHIJK";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -44,14 +45,17 @@ public class Letters {
 		currLetters.add(letterPool.remove(rand));
 	}
 	
-	public boolean dump(char c) {		//dump function which puts a desired letter back into the pool but makes the player take 3 more
-		if(currLetters.size()>3) {
-			peel();						//under construction
-			peel();
-			peel();
-			letterPool.add(c);
+	public void dump(char c) {		//dump function which puts a desired letter back into the pool but makes the player take 3 more
+		int index=0;
+		for(int i=0;i<currLetters.size();i++) {
+			if(currLetters.get(i)==c) {
+				index=i;						//gets index of dumped letter
+			}
 		}
-		return true;
+		peel();				
+		peel();
+		peel();
+		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
 	}
 	
 	public ArrayList<Character> getPool() {
