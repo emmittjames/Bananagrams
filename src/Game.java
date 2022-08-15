@@ -20,11 +20,8 @@ public class Game {
 			print += ", type 0 to dump";
 		}
 		if(!board.empty()) {
-			print += ", type 1 to move a piece";
+			print += ", type 1 to move a piece, type 2 to remove a piece from the board";
 		}
-		/*if() {
-			print += ", type 2 to remove a piece from the board";
-		}*/
 		if(lets.checkGameOver()) {	
 			print += ", type 3 to end the game";
 		}
@@ -50,9 +47,9 @@ public class Game {
 		else if(c=='1') {	//move piece
 			movePiece();
 		}
-		/*else if(c=='2') {
+		else if(c=='2') {
 			removePiece();
-		}*/
+		}
 		else if(c=='3') {
 			if(gameOver) {					//game over
 				gameOver();
@@ -70,7 +67,7 @@ public class Game {
 		playGame();		//makes method repeat itself over and over until game over
 	}
 	
-	/*private void removePiece() {
+	private void removePiece() {
 		System.out.println("Which letter would you like to remove?");
 		int[] coords = getCoords();
 		if(coords[0]==-1)		////if user types -1 allows user to re-pick move
@@ -80,12 +77,12 @@ public class Game {
 			if(coords[0]==-1)		////if user types -1 allows user to re-pick move
 				return;
 		}
-		char c = board.remove(coords);
+		char c = board.remove(coords[0], coords[1]);
 		lets.remove(c);
-	}*/
+	}
 	
 	private void dump() {
-		System.out.println("Type a letter to dump it or type -1 to select a different move");
+		System.out.print("Type a letter to dump it or type -1 to select a different move");
 		String in = sc.next().toUpperCase();
 		while(in.length()!=1 && !in.equals("-1")) {
 			System.out.println("Please enter a single character");

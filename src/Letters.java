@@ -17,9 +17,9 @@ public class Letters {
 		startingLetters(3);
 	}
 	
-	/*public void remove(char c) {		//puts a letter back into the players hand
+	public void remove(char c) {		//puts a letter back into the players hand
 		currLetters.add(c);
-	}*/
+	}
 	
 	public void play(char c) {		//removes the played letter from the players hand
 		for(int i=0;i<currLetters.size();i++) {

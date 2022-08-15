@@ -24,12 +24,19 @@ public class Board {
 		return false;
 	}
 	
+	public char remove(int xCord, int yCord) {
+		xCord+=2;	//Dilutes coords so they can be used with the board
+		yCord+=2;
+		char c = board[yCord][xCord];
+		board[yCord][xCord] = ' ';
+		return c;
+	}
+	
 	public void move(int xCordOld, int yCordOld, int xCordNew, int yCordNew) {		//moves letter from old coords to new coords
 		xCordOld+=2;	//Dilutes coords so they can be used with the board
 		yCordOld+=2;
 		xCordNew+=2;
 		yCordNew+=2;
-		
 		char c = board[yCordOld][xCordOld];
 		board[yCordOld][xCordOld] = ' ';
 		board[yCordNew][xCordNew] = c;
