@@ -177,6 +177,17 @@ public class Board {
 		return board.length-3;
 	}
 	
+	public boolean empty() {	//returns true if the board is empty
+		for(int i=2;i<board.length-2;i++) {
+			for(int j=2;j<board[0].length-2;j++) {
+				if(board[i][j]!=' ') {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public void printBoard(Letters lets) {		//prints the board along with the current letters underneath
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {

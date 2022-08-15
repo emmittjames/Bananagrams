@@ -7,4 +7,5 @@ public class Main {
 }
 
 //TODO:
+//Dont ask to move a piece on the first turn
 //Allow user to remove letter from board and put back in hand

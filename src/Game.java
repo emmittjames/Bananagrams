@@ -15,15 +15,21 @@ public class Game {
 	public void playGame() {		//Gets input from the user for desired course of action
 		boolean gameOver = false;	//true when user wants to end the game
 		board.printBoard(lets);
-		String print = "Enter a letter to play it, type 0 to move a piece";
+		String print = "Enter a letter to play it";
 		if(lets.getPool().size()>=3) {
-			print += ", type 1 to dump";
+			print += ", type 0 to dump";
 		}
+		if(!board.empty()) {
+			print += ", type 1 to move a piece";
+		}
+		/*if() {
+			print += ", type 2 to remove a piece from the board";
+		}*/
 		if(lets.checkGameOver()) {	
-			print += ", type 2 to end the game";
+			print += ", type 3 to end the game";
 		}
 		else if(lets.checkPeel()) {	
-			print += ", type 2 to peel";
+			print += ", type 3 to peel";
 		}
 		print+=": ";
 		System.out.print(print);
@@ -33,24 +39,27 @@ public class Game {
 			in = sc.next().toUpperCase();
 		}
 		char c = in.charAt(0);
-		if(c=='2') {
-			if(gameOver) {					//game over
-				gameOver();
-				return;
-			}
-			lets.peel();					//peel
-			System.out.println("PEEL!");
-		}
-		else if(c=='0') {	//move piece
-			movePiece();
-		}
-		else if(c=='1') {	//dump
+		if(c=='0') {	//dump
 			if(lets.getPool().size()>=3) {
 				dump();
 			}
 			else {
 				System.out.println("Not enough letters to dump");
 			}
+		}
+		else if(c=='1') {	//move piece
+			movePiece();
+		}
+		/*else if(c=='2') {
+			removePiece();
+		}*/
+		else if(c=='3') {
+			if(gameOver) {					//game over
+				gameOver();
+				return;
+			}
+			lets.peel();					//peel
+			System.out.println("PEEL!");
 		}
 		else if(lets.hasLetter(c)) {
 			playPiece(c);
@@ -60,6 +69,20 @@ public class Game {
 		}
 		playGame();		//makes method repeat itself over and over until game over
 	}
+	
+	/*private void removePiece() {
+		System.out.println("Which letter would you like to remove?");
+		int[] coords = getCoords();
+		if(coords[0]==-1)		////if user types -1 allows user to re-pick move
+			return;
+		while(!board.checkOld(coords[0],coords[1])) {
+			coords = getCoords();
+			if(coords[0]==-1)		////if user types -1 allows user to re-pick move
+				return;
+		}
+		char c = board.remove(coords);
+		lets.remove(c);
+	}*/
 	
 	private void dump() {
 		System.out.println("Type a letter to dump it or type -1 to select a different move");
