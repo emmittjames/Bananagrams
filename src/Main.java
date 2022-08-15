@@ -7,5 +7,6 @@ public class Main {
 }
 
 //TODO:
-//make dump
+//revamp how requests are printed
+//dont allow user to dump when not enough letters in pool
 //Remove letter from board and put back in hand

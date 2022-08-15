@@ -184,6 +184,7 @@ public class Board {
 			}
 			System.out.print('\n');
 		}
+		System.out.println("Letters remaining: " + lets.getPool().size());
 		System.out.print("Current letters: ");
 		if(lets.getCurrLets().size()>=1) {
 			for(int i=0;i<lets.getCurrLets().size()-1;i++) {
