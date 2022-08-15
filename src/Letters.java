@@ -16,7 +16,7 @@ public class Letters {
 		startingLetters(3);
 	}
 	
-	public void play(char c) {
+	public void play(char c) {		//removes the played letter from the players hand
 		for(int i=0;i<currLetters.size();i++) {
 			if(currLetters.get(i)==c) {
 				currLetters.remove(i);
@@ -25,18 +25,21 @@ public class Letters {
 		}
 	}
 	
-	public boolean check() {		//checks gameover or peel;
+	public boolean checkPeel() {		
 		if(currLetters.size()==0) {
-			if(letterPool.size()<1) {		//< # of players for gameover
-				return true;
-			}
-			peel();
-			System.out.println("PEEL!");
+			return true;
 		}
 		return false;
 	}
 	
-	private void peel() {
+	public boolean checkGameOver() {	
+		if(currLetters.size()==0 && letterPool.size()==0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void peel() {
 		int rand = (int)(Math.random()*letterPool.size());
 		currLetters.add(letterPool.remove(rand));
 	}
@@ -55,7 +58,7 @@ public class Letters {
 		return letterPool;
 	}
 	
-	public ArrayList<Character> getLets() {
+	public ArrayList<Character> getCurrLets() {
 		return currLetters;
 	}
 	
@@ -64,8 +67,6 @@ public class Letters {
 			int rand = (int)(Math.random()*letterPool.size());
 			currLetters.add(letterPool.remove(rand));
 		}
-		//System.out.println(currLetters);
-		//System.out.println(letterPool);
 	}
 	
 	public boolean hasLetter(char c) {		//returns true if currLetters contains c

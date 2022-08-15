@@ -8,5 +8,6 @@ public class Main {
 
 //TODO:
 //make dump
-//let user place tiles wherever they want but make sure everything is connected at the end
 //Let the game keep running until the user tells the game to stop
+//Let user choose when to peel
+//Remove letter from board and put back in hand

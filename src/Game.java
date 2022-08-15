@@ -13,23 +13,37 @@ public class Game {
 	}
 	
 	public void playGame() {		//Gets input from the user for desired course of action
+		boolean gameOver = false;	//true when user wants to end the game
 		board.printBoard(lets);
-		System.out.print("Enter a letter to play it, type 0 to move a piece, or type 1 to dump: ");
+		if(lets.checkGameOver()) {	//checks for game over
+			System.out.print("Enter a letter to play it, type 0 to move a piece, or type 1 to dump, or type 2 to end the game: ");
+			gameOver = true;
+		}
+		else if(lets.checkPeel()) {	//checks for peel
+			System.out.print("Enter a letter to play it, type 0 to move a piece, type 1 to dump, or type 2 to peel: ");
+		}
+		else {
+			System.out.print("Enter a letter to play it, type 0 to move a piece, or type 1 to dump: ");
+		}
 		String in = sc.next().toUpperCase();
 		while(in.length()!=1) {
 			System.out.println("Please enter a single character");
 			in = sc.next().toUpperCase();
 		}
 		char c = in.charAt(0);
-		if(c=='0') {
+		if(c=='2') {
+			if(gameOver) {					//game over
+				gameOver();
+				return;
+			}
+			lets.peel();					//peel
+			System.out.println("PEEL!");
+		}
+		else if(c=='0') {	//move piece
 			movePiece();
 		}
 		else if(lets.hasLetter(c)) {
 			playPiece(c);
-			if(lets.check()) {	//checks for game over or peel
-				gameOver();
-				return;
-			}
 		}
 		else {
 			System.out.println("Invalid entry");

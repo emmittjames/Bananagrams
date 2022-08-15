@@ -185,11 +185,11 @@ public class Board {
 			System.out.print('\n');
 		}
 		System.out.print("Current letters: ");
-		if(lets.getLets().size()>=1) {
-			for(int i=0;i<lets.getLets().size()-1;i++) {
-				System.out.print(lets.getLets().get(i)+ ", ");			//prints the current letters
+		if(lets.getCurrLets().size()>=1) {
+			for(int i=0;i<lets.getCurrLets().size()-1;i++) {
+				System.out.print(lets.getCurrLets().get(i)+ ", ");			//prints the current letters
 			}
-			System.out.println(lets.getLets().get(lets.getLets().size()-1));
+			System.out.println(lets.getCurrLets().get(lets.getCurrLets().size()-1));
 		}
 	}
 }

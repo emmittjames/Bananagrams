@@ -5,7 +5,7 @@ public class Dictionary {
 	
 	Hashtable<String,String> dictionary;
 	
-	public Dictionary() {	//creates a hashmap with all words in the dictionary text file
+	public Dictionary() {	//creates a hashmap with all words in the dictionary text file (words.txt)
 		dictionary = new Hashtable<String,String>();
 		try {
 			File f = new File("words.txt");
@@ -14,7 +14,7 @@ public class Dictionary {
 			String line;
 			while((line = in.readLine())!=null) {
 				line = line.toUpperCase();
-				dictionary.put(line,line);		//creates a hashmap with all words in the dictionary text file
+				dictionary.put(line,line);
 			}
 			in.close();
 		} catch(IOException e) {
