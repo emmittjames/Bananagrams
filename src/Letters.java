@@ -89,16 +89,22 @@ public class Letters {
 		return false;
 	}
 	
-	public HBox getHBox() {
+	/*public HBox getHBox() {
 		HBox box = new HBox(5);
-		for(char c:currLetters) {
-			 Button button = new Button(c+"");
-             button.setMinWidth(40);
-             button.setMaxWidth(40);
-             button.setMinHeight(40);
-             button.setMaxHeight(40);
-			box.getChildren().add(new StackPane(button));
+		for(int i=0;i<currLetters.size();i++) {
+			char c = currLetters.get(i);
+			Tile tile = new Tile(i,true);
+			tile.setText(c+"");
+			tile.setMinWidth(40);
+	        tile.setMaxWidth(40);
+	        tile.setMinHeight(40);
+	        tile.setMaxHeight(40);
+			tile.setOnAction(e -> {
+				System.out.println("letter press");
+				tile.setInitClick(true);
+			});
+			box.getChildren().add(new StackPane(tile));
 		}
 		return box;
-	}
+	}*/
 }
