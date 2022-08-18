@@ -22,23 +22,26 @@ public class Graphics extends Application{
 	GridPane grid = new GridPane();
 	boolean initClick = false;
 	Tile currentTile;
+	HBox letters;
 	
 	private Parent setGame() {
-		BorderPane pane = new BorderPane();
+		VBox pane = new VBox(50);
 		pane.setPrefSize(800,600);
 		pane.setPadding(new Insets(25, 25, 25, 25));
 		
 		GridPane grid = getGridPane();
-		pane.setTop(grid);
+		pane.getChildren().add(grid);
 		grid.setAlignment(Pos.CENTER);
 		
-		VBox padding = new VBox(20,new Text(""),new Text(""));
-		pane.setCenter(padding);
+		HBox buttons = getButtons();
+		pane.getChildren().add(buttons);
+		buttons.setAlignment(Pos.CENTER);
 		
-		HBox letters = getHBox();
-		pane.setBottom(letters);
+		letters = getHBox();
+		pane.getChildren().add(letters);
 		letters.setAlignment(Pos.CENTER);
 		
+		grid.setAlignment(Pos.CENTER);
 		return pane;
 	}
 	
@@ -56,7 +59,7 @@ public class Graphics extends Application{
     			tile.setOnAction(e -> {
     				System.out.println("board press");
     				if(initClick) {
-    					placePiece(new Tile(0,'X'),tile.getX(),tile.getY());
+    					placePiece(tile.getX(),tile.getY());
     				}
     				initClick=false;
     			});
@@ -66,8 +69,47 @@ public class Graphics extends Application{
         return grid;
 	}
 	
-	public void placePiece(Tile tile, int x, int y) {
-		grid.add(new StackPane(currentTile),x,y);
+	public HBox getButtons() {
+		HBox box = new HBox(5);
+		
+		Button peel = new Button("Peel");
+		peel.setMinWidth(40);
+        peel.setMaxWidth(40);
+        peel.setMinHeight(40);
+        peel.setMaxHeight(40);
+		peel.setOnAction(e -> {
+			System.out.println("PEEL!");
+		});
+		
+		Button dump = new Button("Dmp");
+		dump.setMinWidth(40);
+        dump.setMaxWidth(40);
+        dump.setMinHeight(40);
+        dump.setMaxHeight(40);
+		dump.setOnAction(e -> {
+			System.out.println("DUMP!");
+		});
+		
+		Button del = new Button("Del");
+		del.setMinWidth(40);
+        del.setMaxWidth(40);
+        del.setMinHeight(40);
+        del.setMaxHeight(40);
+		del.setOnAction(e -> {
+			System.out.println("DELETE!");
+		});
+		
+		Button end = new Button("END");
+		end.setMinWidth(40);
+        end.setMaxWidth(40);
+        end.setMinHeight(40);
+        end.setMaxHeight(40);
+		end.setOnAction(e -> {
+			System.out.println("GAME OVER!");
+		});
+		
+		box.getChildren().addAll(peel,dump,del,end);
+		return box;
 	}
 	
 	public HBox getHBox() {
@@ -88,6 +130,21 @@ public class Graphics extends Application{
 			box.getChildren().add(new StackPane(tile));
 		}
 		return box;
+	}
+	
+	public void placePiece(int x, int y) {
+		grid.add(new StackPane(currentTile),x,y);
+		Tile tile = new Tile(-1,true);
+		tile.setText("X");
+		tile.setMinWidth(40);
+        tile.setMaxWidth(40);
+        tile.setMinHeight(40);
+        tile.setMaxHeight(40);
+        letters.getChildren().add(new StackPane(tile));
+	}
+	
+	private void addLetters() {
+		
 	}
 
 	@Override
