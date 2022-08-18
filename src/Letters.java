@@ -1,5 +1,8 @@
 import java.util.*;
 
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+
 public class Letters {
 	
 	private ArrayList<Character> letterPool = new ArrayList<Character>();
@@ -83,5 +86,13 @@ public class Letters {
 				return true;
 		}
 		return false;
+	}
+	
+	public HBox getHBox() {
+		HBox box = new HBox(5);
+		for(char c:currLetters) {
+			box.getChildren().add(new Button(c+""));
+		}
+		return box;
 	}
 }

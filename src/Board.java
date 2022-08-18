@@ -1,3 +1,10 @@
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 public class Board {
 	
 	private char[][] board;
@@ -210,5 +217,29 @@ public class Board {
 			}
 			System.out.println(lets.getCurrLets().get(lets.getCurrLets().size()-1));
 		}
+	}
+	
+	public GridPane getGridPane() {
+		GridPane grid = new GridPane();
+		grid.setPrefSize(300, 300);
+
+        for (int i = 0; i < board.length-3; i++) {
+            for (int j = 0; j < board[1].length-3; j++) {
+
+                Rectangle tile = new Rectangle(30, 30);
+            	//StackPane tile = new StackPane();
+                tile.setFill(Color.LEMONCHIFFON);
+                tile.setStroke(Color.BLACK);
+
+                Text text = new Text(j + ", " + i);
+                text.setFont(Font.font(10));
+                grid.add(new StackPane(tile, text), j, i);
+
+                //GridPane.setRowIndex(tile, i);
+                //GridPane.setColumnIndex(tile, j);
+                //grid.getChildren().addAll(tile, text);
+            }
+        }
+        return grid;
 	}
 }

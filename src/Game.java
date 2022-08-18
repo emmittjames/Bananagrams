@@ -7,8 +7,8 @@ public class Game {
 	private Scanner sc;
 	
 	public Game() {
-		board = new Board();
 		sc = new Scanner(System.in);
+		board = new Board();
 		lets = new Letters();
 	}
 	
@@ -168,5 +168,13 @@ public class Game {
 		else {
 			System.out.println("\nYou lost");
 		}
+	}
+	
+	public Letters getLets() {
+		return lets;
+	}
+	
+	public Board getBoard() {
+		return board;
 	}
 }
