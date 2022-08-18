@@ -1,9 +1,8 @@
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class Board {
 	
@@ -227,17 +226,21 @@ public class Board {
             for (int j = 0; j < board[1].length-3; j++) {
 
                 Rectangle tile = new Rectangle(30, 30);
-            	//StackPane tile = new StackPane();
                 tile.setFill(Color.LEMONCHIFFON);
                 tile.setStroke(Color.BLACK);
 
-                Text text = new Text(j + ", " + i);
-                text.setFont(Font.font(10));
-                grid.add(new StackPane(tile, text), j, i);
-
-                //GridPane.setRowIndex(tile, i);
-                //GridPane.setColumnIndex(tile, j);
-                //grid.getChildren().addAll(tile, text);
+                //Text text = new Text(j + ", " + i);
+                //text.setFont(Font.font(10));
+                
+                //grid.add(new StackPane(tile, text), j, i);
+                
+                String text = j + "" + i;
+                Button button = new Button(text);
+                button.setMinWidth(40);
+                button.setMaxWidth(40);
+                button.setMinHeight(40);
+                button.setMaxHeight(40);
+                grid.add(new StackPane(button), j, i);
             }
         }
         return grid;

@@ -2,6 +2,7 @@ import java.util.*;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 public class Letters {
 	
@@ -91,7 +92,12 @@ public class Letters {
 	public HBox getHBox() {
 		HBox box = new HBox(5);
 		for(char c:currLetters) {
-			box.getChildren().add(new Button(c+""));
+			 Button button = new Button(c+"");
+             button.setMinWidth(40);
+             button.setMaxWidth(40);
+             button.setMinHeight(40);
+             button.setMaxHeight(40);
+			box.getChildren().add(new StackPane(button));
 		}
 		return box;
 	}
