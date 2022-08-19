@@ -34,6 +34,10 @@ public class Letters {
 		}
 	}
 	
+	public void play(int i) {		//removes the played letter from the players hand
+		currLetters.remove(i);
+	}
+	
 	public boolean checkPeel() {		
 		if(currLetters.size()==0) {
 			return true;
@@ -48,9 +52,11 @@ public class Letters {
 		return false;
 	}
 	
-	public void peel() {
+	public char peel() {
 		int rand = (int)(Math.random()*letterPool.size());
-		currLetters.add(letterPool.remove(rand));
+		char c = letterPool.remove(rand);
+		currLetters.add(c);
+		return c;
 	}
 	
 	public void dump(char c) {		//dump function which puts a desired letter back into the pool but makes the player take 3 more
@@ -87,6 +93,11 @@ public class Letters {
 				return true;
 		}
 		return false;
+	}
+	
+	public void printLetters() {
+		System.out.println(currLetters);
+		System.out.println(letterPool);
 	}
 	
 	/*public HBox getHBox() {

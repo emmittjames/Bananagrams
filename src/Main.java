@@ -7,4 +7,4 @@ public class Main {
 }
 
 //TODO:
-//GUI in JavaFX
+//Fix already placed on tiles becoming dead spaces

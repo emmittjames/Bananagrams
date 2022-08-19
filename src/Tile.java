@@ -2,26 +2,26 @@ import javafx.scene.control.Button;
 
 public class Tile extends Button{
 	
-	boolean letter;		//true if letter false if board tile
+	boolean type;		//true if letter false if board tile
 	int x,y;			//x and y cords when placed on board
-	int index;			//index in currLetters
+	char letter;
+	boolean played = false;
 	
-	public Tile(int i,boolean let) {		//letter tile
-		letter = let;
-		index = i;
+	public Tile(char c) {		//letter tile
+		type = true;
+		letter = c;
 		x=-1;
 		y=-1;
 	}
 	
 	public Tile(int a,int b) {		//board tile
-		letter = false;
-		index = -1;			
+		type = false;		
 		x=a;				
 		y=b;
 	}
 	
 	public boolean isLetter() {
-		return letter;
+		return type;
 	}
 	
 	public int getX() {
@@ -32,7 +32,11 @@ public class Tile extends Button{
 		return y;
 	}
 	
-	public int getIndex() {
-		return index;
+	public int getLetter() {
+		return letter;
+	}
+	
+	public void play() {
+		played = true;
 	}
 }

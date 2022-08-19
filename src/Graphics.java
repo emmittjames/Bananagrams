@@ -17,12 +17,13 @@ import javafx.stage.Stage;
 public class Graphics extends Application{
 	
 	private Game game = new Game();
-	private Letters lets = game.getLets();
+	private Letters currentLetters = game.getLets();
 	private Board board = game.getBoard();
 	GridPane grid = new GridPane();
 	boolean initClick = false;
 	Tile currentTile;
 	HBox letters;
+	boolean noLetters=false;
 	
 	private Parent setGame() {
 		VBox pane = new VBox(50);
@@ -79,6 +80,7 @@ public class Graphics extends Application{
         peel.setMaxHeight(40);
 		peel.setOnAction(e -> {
 			System.out.println("PEEL!");
+			peel();
 		});
 		
 		Button dump = new Button("Dmp");
@@ -114,9 +116,9 @@ public class Graphics extends Application{
 	
 	public HBox getHBox() {
 		HBox box = new HBox(5);
-		for(int i=0;i<lets.getCurrLets().size();i++) {
-			char c = lets.getCurrLets().get(i);
-			Tile tile = new Tile(i,true);
+		for(int i=0;i<currentLetters.getCurrLets().size();i++) {
+			char c = currentLetters.getCurrLets().get(i);
+			Tile tile = new Tile(i,c);
 			tile.setText(c+"");
 			tile.setMinWidth(40);
 	        tile.setMaxWidth(40);
@@ -132,19 +134,34 @@ public class Graphics extends Application{
 		return box;
 	}
 	
+	public void movePiece(int x, int y) {
+		grid.add(new StackPane(currentTile),x,y);
+	}
+	
 	public void placePiece(int x, int y) {
 		grid.add(new StackPane(currentTile),x,y);
-		Tile tile = new Tile(-1,true);
-		tile.setText("X");
+		if(currentLetters.getCurrLets().size()!=0) {
+			currentLetters.play(currentTile.getLetter());
+		}
+		else {
+			noLetters=true;
+		}
+	}
+	
+	private void peel() {
+		char c = currentLetters.peel();
+		Tile tile = new Tile(c);
+		tile.setText(c+"");
 		tile.setMinWidth(40);
         tile.setMaxWidth(40);
         tile.setMinHeight(40);
         tile.setMaxHeight(40);
+        tile.setOnAction(e -> {
+			System.out.println("letter press");
+			currentTile = tile;
+			initClick=true;
+		});
         letters.getChildren().add(new StackPane(tile));
-	}
-	
-	private void addLetters() {
-		
 	}
 
 	@Override
