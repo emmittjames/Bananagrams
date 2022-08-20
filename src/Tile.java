@@ -13,10 +13,6 @@ public class Tile extends Button{
 		x=-1;
 		y=-1;
 		super.setText(c+"");
-		super.setMinWidth(40);
-        super.setMaxWidth(40);
-        super.setMinHeight(40);
-        super.setMaxHeight(40);
 	}
 	
 	public Tile(int a,int b) {		//board tile
@@ -55,5 +51,10 @@ public class Tile extends Button{
 	
 	public void setPlayed() {
 		played=true;
+	}
+	
+	public void setCoords(int a, int b) {
+		x=a;
+		y=b;
 	}
 }
