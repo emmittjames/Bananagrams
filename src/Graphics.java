@@ -4,7 +4,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +22,7 @@ public class Graphics extends Application{
 	private Game game = new Game();
 	private Letters currLetters = game.getLets();
 	private Board board = game.getBoard();
+	VBox window;
 	private GridPane grid = new GridPane();
 	private boolean initClick = false;
 	private Tile currTile;
@@ -26,26 +30,27 @@ public class Graphics extends Application{
 	private Button peel;
 	private Button end;
 	private int buttonSize = 37;
+	private Stage stage;
 	
 	private Parent setGame() {
-		VBox pane = new VBox(50);
-		pane.setPrefSize(800,600);
-		pane.setPadding(new Insets(15, 15, 15, 15));
+		window = new VBox(50);
+		window.setPrefSize(800,600);
+		window.setPadding(new Insets(15, 15, 15, 15));
 		
 		GridPane grid = getGridPane();
-		pane.getChildren().add(grid);
+		window.getChildren().add(grid);
 		grid.setAlignment(Pos.CENTER);
 		
 		HBox buttons = getButtons();
-		pane.getChildren().add(buttons);
+		window.getChildren().add(buttons);
 		buttons.setAlignment(Pos.CENTER);
 		
 		letters = getHBox();
-		pane.getChildren().add(letters);
+		window.getChildren().add(letters);
 		letters.setAlignment(Pos.CENTER);
 		
 		grid.setAlignment(Pos.CENTER);
-		return pane;
+		return window;
 	}
 	
 	public GridPane getGridPane() {
@@ -125,7 +130,14 @@ public class Graphics extends Application{
         end.setMaxHeight(buttonSize);
 		end.setOnAction(e -> {
 			System.out.println("GAME OVER!");
-			System.exit(0);
+			Alert a = new Alert(AlertType.INFORMATION);
+			if(game.gameOver()) {
+				a.setContentText("You won");
+			}
+			else {
+				a.setContentText("You lost");
+			}
+			a.show();
 		});
 		
 		box.getChildren().addAll(peel,dump,del,end);
@@ -195,11 +207,12 @@ public class Graphics extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
 		Scene scene = new Scene(setGame());
-		primaryStage.setTitle("Bananagrams");
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		stage.setTitle("Bananagrams");
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.show();
 	}
 	
 	public static void main(String[] args) {

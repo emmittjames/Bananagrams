@@ -7,7 +7,5 @@ public class Main {
 }
 
 //TODO:
-//Fix already placed on tiles becoming dead spaces
-//Make gameover function
 //Make dump
 //Make delete

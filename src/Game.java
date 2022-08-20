@@ -160,13 +160,15 @@ public class Game {
 	}
 	
 	
-	private void gameOver() {		//game over function
+	public boolean gameOver() {		//game over function
 		board.printBoard(lets);
 		if(board.checkConnected() && board.checkValidWords()) {		//checks if all letters are connected and if every word formed is a real word
 			System.out.println("\nYou won!");	
+			return true;
 		}
 		else {
 			System.out.println("\nYou lost");
+			return false;
 		}
 	}
 	
