@@ -17,13 +17,14 @@ import javafx.stage.Stage;
 public class Graphics extends Application{
 	
 	private Game game = new Game();
-	private Letters currentLetters = game.getLets();
+	private Letters currLetters = game.getLets();
 	private Board board = game.getBoard();
-	GridPane grid = new GridPane();
-	boolean initClick = false;
-	Tile currentTile;
-	HBox letters;
-	boolean noLetters=false;
+	private GridPane grid = new GridPane();
+	private boolean initClick = false;
+	private Tile currTile;
+	private HBox letters;
+	private Button peel;
+	private Button end;
 	
 	private Parent setGame() {
 		VBox pane = new VBox(50);
@@ -60,7 +61,13 @@ public class Graphics extends Application{
     			tile.setOnAction(e -> {
     				System.out.println("board press");
     				if(initClick) {
-    					placePiece(tile.getX(),tile.getY());
+    					if(currTile.getPlayed()) {
+    						movePiece(tile.getX(),tile.getY());
+    					}
+    					else {
+    						currTile.setPlayed();
+    						placePiece(tile.getX(),tile.getY());
+    					}
     				}
     				initClick=false;
     			});
@@ -73,14 +80,18 @@ public class Graphics extends Application{
 	public HBox getButtons() {
 		HBox box = new HBox(5);
 		
-		Button peel = new Button("Peel");
+		peel = new Button("Peel");
+		peel.setDisable(true);
 		peel.setMinWidth(40);
         peel.setMaxWidth(40);
         peel.setMinHeight(40);
         peel.setMaxHeight(40);
 		peel.setOnAction(e -> {
-			System.out.println("PEEL!");
-			peel();
+			if(currLetters.availablePeel()) {
+				System.out.println("PEEL!");
+				peel();
+				peel.setDisable(true);
+			}
 		});
 		
 		Button dump = new Button("Dmp");
@@ -101,7 +112,8 @@ public class Graphics extends Application{
 			System.out.println("DELETE!");
 		});
 		
-		Button end = new Button("END");
+		end = new Button("END");
+		end.setDisable(true);
 		end.setMinWidth(40);
         end.setMaxWidth(40);
         end.setMinHeight(40);
@@ -116,17 +128,12 @@ public class Graphics extends Application{
 	
 	public HBox getHBox() {
 		HBox box = new HBox(5);
-		for(int i=0;i<currentLetters.getCurrLets().size();i++) {
-			char c = currentLetters.getCurrLets().get(i);
-			Tile tile = new Tile(i,c);
-			tile.setText(c+"");
-			tile.setMinWidth(40);
-	        tile.setMaxWidth(40);
-	        tile.setMinHeight(40);
-	        tile.setMaxHeight(40);
+		for(int i=0;i<currLetters.getCurrLets().size();i++) {
+			char c = currLetters.getCurrLets().get(i);
+			Tile tile = new Tile(c);
 			tile.setOnAction(e -> {
 				System.out.println("letter press");
-				currentTile = tile;
+				currTile = tile;
 				initClick=true;
 			});
 			box.getChildren().add(new StackPane(tile));
@@ -134,22 +141,31 @@ public class Graphics extends Application{
 		return box;
 	}
 	
+	
+	
+	//============================================================================================================================================
+	
+	
+	
 	public void movePiece(int x, int y) {
-		grid.add(new StackPane(currentTile),x,y);
+		grid.add(new StackPane(currTile),x,y);
 	}
 	
 	public void placePiece(int x, int y) {
-		grid.add(new StackPane(currentTile),x,y);
-		if(currentLetters.getCurrLets().size()!=0) {
-			currentLetters.play(currentTile.getLetter());
-		}
-		else {
-			noLetters=true;
+		grid.add(new StackPane(currTile),x,y);
+		currLetters.play((char)currTile.getLetter());
+		if(currLetters.getCurrLets().size()==0) {
+			if(currLetters.getPool().size()>0) {
+				peel.setDisable(false);
+			}
+			else {
+				end.setDisable(false);
+			}
 		}
 	}
 	
 	private void peel() {
-		char c = currentLetters.peel();
+		char c = currLetters.peel();
 		Tile tile = new Tile(c);
 		tile.setText(c+"");
 		tile.setMinWidth(40);
@@ -158,7 +174,7 @@ public class Graphics extends Application{
         tile.setMaxHeight(40);
         tile.setOnAction(e -> {
 			System.out.println("letter press");
-			currentTile = tile;
+			currTile = tile;
 			initClick=true;
 		});
         letters.getChildren().add(new StackPane(tile));

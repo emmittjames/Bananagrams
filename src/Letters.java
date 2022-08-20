@@ -13,7 +13,7 @@ public class Letters {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
 		//String str = "HELLO";
-		String str = "ABCDEFGHIJK";
+		String str = "ABCDEF";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -32,10 +32,11 @@ public class Letters {
 				return;
 			}
 		}
+		System.out.println("didnt remove");
 	}
 	
 	public void play(int i) {		//removes the played letter from the players hand
-		currLetters.remove(i);
+		currLetters.remove(0);
 	}
 	
 	public boolean checkPeel() {		
@@ -95,9 +96,10 @@ public class Letters {
 		return false;
 	}
 	
-	public void printLetters() {
-		System.out.println(currLetters);
-		System.out.println(letterPool);
+	public boolean availablePeel() {
+		if(currLetters.size()==0) 
+			return true;
+		return false;
 	}
 	
 	/*public HBox getHBox() {
