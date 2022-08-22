@@ -9,3 +9,4 @@ public class Main {
 //TODO:
 //Make dump
 //Make delete
+//Make graphics actually interact with the board class so game over works

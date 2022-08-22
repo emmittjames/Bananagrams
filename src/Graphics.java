@@ -170,6 +170,7 @@ public class Graphics extends Application{
 	
 	
 	public void movePiece(int x, int y) {
+		board.move(currTile.getX(),currTile.getY(),x,y);
 		setNewButton(currTile.getY(),currTile.getX());
 		grid.add(new StackPane(currTile),x,y);
 		currTile.setCoords(x,y);
@@ -179,6 +180,7 @@ public class Graphics extends Application{
 		grid.add(new StackPane(currTile),x,y);
 		currTile.setCoords(x,y);
 		currLetters.play((char)currTile.getLetter());
+		board.play(x,y,(char)currTile.getLetter());
 		if(currLetters.getCurrLets().size()==0) {
 			if(currLetters.getPool().size()>0) {
 				peel.setDisable(false);
