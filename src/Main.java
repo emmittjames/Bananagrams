@@ -7,6 +7,6 @@ public class Main {
 }
 
 //TODO:
-//Make dump
+//Make dump not give back the dumped letter
 //Make delete
-//Make graphics actually interact with the board class so game over works
+//Make a play again function

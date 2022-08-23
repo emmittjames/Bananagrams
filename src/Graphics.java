@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -7,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -31,6 +34,8 @@ public class Graphics extends Application{
 	private Button end;
 	private int buttonSize = 37;
 	private Stage stage;
+	private Button dump;
+	private Button del;
 	
 	private Parent setGame() {
 		window = new VBox(50);
@@ -66,7 +71,6 @@ public class Graphics extends Application{
 	
 	private void setNewButton(int i, int j) {
 		Tile tile = new Tile(j,i);
-		tile.setText(j+""+i);
 		tile.setMinWidth(buttonSize);
         tile.setMaxWidth(buttonSize);
         tile.setMinHeight(buttonSize);
@@ -101,28 +105,41 @@ public class Graphics extends Application{
 				System.out.println("PEEL!");
 				peel();
 				peel.setDisable(true);
+				if(currLetters.getPool().size()<=2) {
+					dump.setDisable(true);
+				}
 			}
 		});
 		
-		Button dump = new Button("Dmp");
+		dump = new Button("Dmp");
 		dump.setMinWidth(buttonSize);
         dump.setMaxWidth(buttonSize);
         dump.setMinHeight(buttonSize);
         dump.setMaxHeight(buttonSize);
+        if(currLetters.getPool().size()<=2) {
+			dump.setDisable(true);
+		}
 		dump.setOnAction(e -> {
 			System.out.println("DUMP!");
+			int index = currLetters.delete((char)currTile.getLetter());
+			dump(index);
+			if(currLetters.getPool().size()<=2) {
+				dump.setDisable(true);
+			}
 		});
 		
-		Button del = new Button("Del");
+		del = new Button("Del");
 		del.setMinWidth(buttonSize);
         del.setMaxWidth(buttonSize);
         del.setMinHeight(buttonSize);
         del.setMaxHeight(buttonSize);
 		del.setOnAction(e -> {
 			System.out.println("DELETE!");
+			int index = currLetters.delete((char)currTile.getLetter());
+			delete(index);
 		});
 		
-		end = new Button("END");
+		end = new Button("End");
 		end.setDisable(true);
 		end.setMinWidth(buttonSize);
         end.setMaxWidth(buttonSize);
@@ -130,14 +147,25 @@ public class Graphics extends Application{
         end.setMaxHeight(buttonSize);
 		end.setOnAction(e -> {
 			System.out.println("GAME OVER!");
-			Alert a = new Alert(AlertType.INFORMATION);
+			String str;
 			if(game.gameOver()) {
-				a.setContentText("You won");
+				str = "You won";
 			}
 			else {
-				a.setContentText("You lost");
+				str = "You lost";
 			}
-			a.show();
+			ButtonType playAgain = new ButtonType("Play Again [doesn't work]");
+			ButtonType exit = new ButtonType("Exit");
+			Alert a = new Alert(AlertType.NONE, str, playAgain, exit);
+			Optional<ButtonType> result = a.showAndWait();
+			if(result.get() == exit) {
+				System.out.println("close");
+				System.exit(0);
+			}
+			if(result.get() == playAgain) {
+				System.out.println("play again");
+			}
+			System.out.println("test");
 		});
 		
 		box.getChildren().addAll(peel,dump,del,end);
@@ -205,6 +233,21 @@ public class Graphics extends Application{
 			initClick=true;
 		});
         letters.getChildren().add(new StackPane(tile));
+	}
+	
+	private void dump(int index) {
+		delete(index);
+		peel();
+		peel();
+		peel();
+	}
+	
+	private void delete(int index) {
+		letters.getChildren().remove(index);
+		System.out.println(currLetters.getCurrLets());
+		if(currLetters.getPool().size()>=3) {
+			dump.setDisable(false);
+		}
 	}
 
 	@Override

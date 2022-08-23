@@ -13,7 +13,7 @@ public class Letters {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
 		//String str = "HELLO";
-		String str = "HELLO";
+		String str = "MUSHROOM";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -73,6 +73,17 @@ public class Letters {
 		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
 	}
 	
+	public int delete(char c) {		//delete function for delete and dump
+		int index=0;
+		for(int i=0;i<currLetters.size();i++) {
+			if(currLetters.get(i)==c) {
+				index=i;						//gets index of dumped letter
+			}
+		}
+		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
+		return index;
+	}
+	
 	public ArrayList<Character> getPool() {
 		return letterPool;
 	}
@@ -101,23 +112,4 @@ public class Letters {
 			return true;
 		return false;
 	}
-	
-	/*public HBox getHBox() {
-		HBox box = new HBox(5);
-		for(int i=0;i<currLetters.size();i++) {
-			char c = currLetters.get(i);
-			Tile tile = new Tile(i,true);
-			tile.setText(c+"");
-			tile.setMinWidth(40);
-	        tile.setMaxWidth(40);
-	        tile.setMinHeight(40);
-	        tile.setMaxHeight(40);
-			tile.setOnAction(e -> {
-				System.out.println("letter press");
-				tile.setInitClick(true);
-			});
-			box.getChildren().add(new StackPane(tile));
-		}
-		return box;
-	}*/
 }
