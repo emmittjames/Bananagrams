@@ -49,8 +49,8 @@ public class Tile extends Button{
 		return played;
 	}
 	
-	public void setPlayed() {
-		played=true;
+	public void setPlayed(boolean b) {
+		played=b;
 	}
 	
 	public void setCoords(int a, int b) {

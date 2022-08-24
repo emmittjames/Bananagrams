@@ -218,30 +218,4 @@ public class Board {
 			System.out.println(lets.getCurrLets().get(lets.getCurrLets().size()-1));
 		}
 	}
-	
-	/*public GridPane getGridPane() {
-		GridPane grid = new GridPane();
-		grid.setPrefSize(300, 300);
-
-        for (int i = 0; i < board.length-3; i++) {
-            for (int j = 0; j < board[1].length-3; j++) {
-                Tile tile = new Tile(j,i);
-    			tile.setText(j+""+i);
-    			tile.setMinWidth(40);
-    	        tile.setMaxWidth(40);
-    	        tile.setMinHeight(40);
-    	        tile.setMaxHeight(40);
-    			tile.setOnAction(e -> {
-    				System.out.println("board press");
-    				tile.setInitClick(false);
-    			});
-    			grid.add(new StackPane(tile),j,i);
-            }
-        }
-        return grid;
-	}
-	
-	public void placePiece(Tile tile, int x, int y) {
-		
-	}*/
 }

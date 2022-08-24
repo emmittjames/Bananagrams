@@ -63,13 +63,13 @@ public class Graphics extends Application{
 
         for (int i = 0; i < board.getDimensions(); i++) {
             for (int j = 0; j < board.getDimensions(); j++) {
-                setNewButton(i,j);
+                setNewButton(j,i);
             }
         }
         return grid;
 	}
 	
-	private void setNewButton(int i, int j) {
+	private void setNewButton(int j, int i) {
 		Tile tile = new Tile(j,i);
 		tile.setMinWidth(buttonSize);
         tile.setMaxWidth(buttonSize);
@@ -82,11 +82,11 @@ public class Graphics extends Application{
 					movePiece(tile.getX(),tile.getY());
 				}
 				else {
-					currTile.setPlayed();
+					currTile.setPlayed(true);
 					placePiece(tile.getX(),tile.getY());
 				}
 			}
-			initClick=false;
+			noTileSelected();
 		});
 		grid.add(new StackPane(tile),j,i);
 	}
@@ -105,10 +105,8 @@ public class Graphics extends Application{
 				System.out.println("PEEL!");
 				peel();
 				peel.setDisable(true);
-				if(currLetters.getPool().size()<=2) {
-					dump.setDisable(true);
-				}
 			}
+			noTileSelected();
 		});
 		
 		dump = new Button("Dmp");
@@ -116,17 +114,18 @@ public class Graphics extends Application{
         dump.setMaxWidth(buttonSize);
         dump.setMinHeight(buttonSize);
         dump.setMaxHeight(buttonSize);
+        dump.setDisable(true);
         if(currLetters.getPool().size()<=2) {
 			dump.setDisable(true);
 		}
 		dump.setOnAction(e -> {
-			System.out.println("DUMP!");
-			int index = currLetters.getIndex((char)currTile.getLetter());
-			dump(index);
-			currLetters.delete((char)currTile.getLetter());
-			if(currLetters.getPool().size()<=2) {
-				dump.setDisable(true);
+			if(initClick) {
+				System.out.println("DUMP!");
+				int index = currLetters.getIndex((char)currTile.getLetter());
+				dump(index);
+				currLetters.delete((char)currTile.getLetter());
 			}
+			noTileSelected();
 		});
 		
 		del = new Button("Del");
@@ -134,10 +133,18 @@ public class Graphics extends Application{
         del.setMaxWidth(buttonSize);
         del.setMinHeight(buttonSize);
         del.setMaxHeight(buttonSize);
+        del.setDisable(true);
 		del.setOnAction(e -> {
-			System.out.println("DELETE!");
-			int index = currLetters.delete((char)currTile.getLetter());
-			delete(index);
+			if(initClick) {
+				if(currTile.getPlayed()) {
+					System.out.println("DELETE!");
+					removePiece(currTile.getX(),currTile.getY());
+					int index = currLetters.delete((char)currTile.getLetter());
+					delete(index);
+					currTile.setPlayed(false);
+				}
+				noTileSelected();
+			}
 		});
 		
 		end = new Button("End");
@@ -177,39 +184,28 @@ public class Graphics extends Application{
 		HBox box = new HBox(5);
 		for(int i=0;i<currLetters.getCurrLets().size();i++) {
 			char c = currLetters.getCurrLets().get(i);
-			Tile tile = new Tile(c);
-			tile.setMinWidth(buttonSize);
-	        tile.setMaxWidth(buttonSize);
-	        tile.setMinHeight(buttonSize);
-	        tile.setMaxHeight(buttonSize);
-			tile.setOnAction(e -> {
-				System.out.println("letter press");
-				currTile = tile;
-				initClick=true;
-			});
+			Tile tile = makeNewTile(c);
 			box.getChildren().add(new StackPane(tile));
 		}
 		return box;
 	}
 	
-	
-	
-	//============================================================================================================================================
-	
-	
-	
-	public void movePiece(int x, int y) {
-		board.move(currTile.getX(),currTile.getY(),x,y);
-		setNewButton(currTile.getY(),currTile.getX());
-		grid.add(new StackPane(currTile),x,y);
-		currTile.setCoords(x,y);
+	private void tileSelected(Tile tile) {
+		initClick=true;
+		currTile = tile;
+		if(currLetters.getPool().size()>=3) {
+			dump.setDisable(false);
+		}
+		if(tile.getPlayed()) {
+			del.setDisable(false);
+		}
 	}
 	
-	public void placePiece(int x, int y) {
-		grid.add(new StackPane(currTile),x,y);
-		currTile.setCoords(x,y);
-		currLetters.play((char)currTile.getLetter());
-		board.play(x,y,(char)currTile.getLetter());
+	private void noTileSelected() {
+		initClick=false;
+		currTile = null;
+		dump.setDisable(true);
+		del.setDisable(true);
 		if(currLetters.getCurrLets().size()==0) {
 			if(currLetters.getPool().size()>0) {
 				peel.setDisable(false);
@@ -220,9 +216,7 @@ public class Graphics extends Application{
 		}
 	}
 	
-	private void peel() {
-		System.out.println(currLetters.getPool() + " peel");
-		char c = currLetters.peel();
+	private Tile makeNewTile(char c) {
 		Tile tile = new Tile(c);
 		tile.setText(c+"");
 		tile.setMinWidth(buttonSize);
@@ -230,10 +224,40 @@ public class Graphics extends Application{
         tile.setMinHeight(buttonSize);
         tile.setMaxHeight(buttonSize);
         tile.setOnAction(e -> {
+        	tileSelected(tile);
 			System.out.println("letter press");
-			currTile = tile;
-			initClick=true;
 		});
+        return tile;
+	}
+	
+	
+	
+	//============================================================================================================================================
+	
+	
+	private void removePiece(int x, int y) {
+		board.remove(x,y);
+		setNewButton(x,y);
+	}
+	
+	private void movePiece(int x, int y) {
+		board.move(currTile.getX(),currTile.getY(),x,y);
+		setNewButton(currTile.getX(),currTile.getY());
+		grid.add(new StackPane(currTile),x,y);
+		currTile.setCoords(x,y);
+	}
+	
+	private void placePiece(int x, int y) {
+		grid.add(new StackPane(currTile),x,y);
+		currTile.setCoords(x,y);
+		currLetters.play((char)currTile.getLetter());
+		board.play(x,y,(char)currTile.getLetter());
+	}
+	
+	private void peel() {
+		System.out.println(currLetters.getPool() + " peel");
+		char c = currLetters.peel();
+		Tile tile = makeNewTile(c);
         letters.getChildren().add(new StackPane(tile));
 	}
 	

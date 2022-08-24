@@ -7,5 +7,6 @@ public class Main {
 }
 
 //TODO:
-//Make dump not give back the dumped letter
 //Make a play again function
+//Fix dump
+//Make buttons grayed out while no tile is selected
