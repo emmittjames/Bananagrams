@@ -121,8 +121,9 @@ public class Graphics extends Application{
 		}
 		dump.setOnAction(e -> {
 			System.out.println("DUMP!");
-			int index = currLetters.delete((char)currTile.getLetter());
+			int index = currLetters.getIndex((char)currTile.getLetter());
 			dump(index);
+			currLetters.delete((char)currTile.getLetter());
 			if(currLetters.getPool().size()<=2) {
 				dump.setDisable(true);
 			}
@@ -220,6 +221,7 @@ public class Graphics extends Application{
 	}
 	
 	private void peel() {
+		System.out.println(currLetters.getPool() + " peel");
 		char c = currLetters.peel();
 		Tile tile = new Tile(c);
 		tile.setText(c+"");
@@ -236,15 +238,14 @@ public class Graphics extends Application{
 	}
 	
 	private void dump(int index) {
+		peel();
+		peel();
+		peel();
 		delete(index);
-		peel();
-		peel();
-		peel();
 	}
 	
 	private void delete(int index) {
 		letters.getChildren().remove(index);
-		System.out.println(currLetters.getCurrLets());
 		if(currLetters.getPool().size()>=3) {
 			dump.setDisable(false);
 		}

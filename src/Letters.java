@@ -13,7 +13,8 @@ public class Letters {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
 		//String str = "HELLO";
-		String str = "MUSHROOM";
+		//String str = "MUSHROOM";
+		String str = "ABCDEFGH";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -74,13 +75,18 @@ public class Letters {
 	}
 	
 	public int delete(char c) {		//delete function for delete and dump
+		int index = getIndex(c);
+		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
+		return index;
+	}
+	
+	public int getIndex(char c) {
 		int index=0;
 		for(int i=0;i<currLetters.size();i++) {
 			if(currLetters.get(i)==c) {
-				index=i;						//gets index of dumped letter
+				index=i;				
 			}
 		}
-		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
 		return index;
 	}
 	

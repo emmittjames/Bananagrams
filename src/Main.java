@@ -8,5 +8,4 @@ public class Main {
 
 //TODO:
 //Make dump not give back the dumped letter
-//Make delete
 //Make a play again function
