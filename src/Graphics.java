@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Graphics extends Application{
@@ -20,18 +22,22 @@ public class Graphics extends Application{
 	private Letters letters = game.getLets();
 	private Board board = game.getBoard();
 	
-	private VBox window;						//window that contains everything
+	private VBox window;						//vbox that contains everything
 	private GridPane grid = new GridPane();		//grid for the board
 	private boolean initClick = false;			//false when no letter is selected, true when a letter is selected
 	private Tile currTile;						//current selected tile
 	private HBox hand;							//players hand
 	private int buttonSize = 37;				//sets the size of all the buttons (board, hand, and functions)
 	private Button peel, end, dump, del;		//buttons for all the functions
+	private Text lettersRemaining = new Text("Letters remaining: " + letters.getPool().size());
 	
 	private Parent setGame() {		//sets all the elements for the game
-		window = new VBox(50);
+		window = new VBox(20);
 		window.setPrefSize(800,600);
 		window.setPadding(new Insets(15, 15, 15, 15));
+		
+		window.getChildren().add(lettersRemaining);
+		lettersRemaining.setTextAlignment(TextAlignment.CENTER);
 		
 		GridPane grid = getGridPane();		//grid
 		window.getChildren().add(grid);
@@ -45,7 +51,6 @@ public class Graphics extends Application{
 		window.getChildren().add(hand);
 		hand.setAlignment(Pos.CENTER);
 		
-		grid.setAlignment(Pos.CENTER);
 		return window;
 	}
 	
@@ -179,7 +184,7 @@ public class Graphics extends Application{
 	private void tileSelected(Tile tile) {		//called when a tile is selected to enable the appropriate buttons
 		initClick=true;
 		currTile = tile;
-		if(letters.getPool().size()>=3) {
+		if(letters.getPool().size()>=3 && !currTile.getPlayed()) {
 			dump.setDisable(false);
 		}
 		if(tile.getPlayed()) {
@@ -201,7 +206,7 @@ public class Graphics extends Application{
 			}
 		}
 	}
-	
+
 	private Tile makeNewTile(char c) {			//makes a new tile for the player's hand
 		Tile tile = new Tile(c);
 		tile.setText(c+"");
@@ -243,6 +248,7 @@ public class Graphics extends Application{
 		char c = letters.peel();
 		Tile tile = makeNewTile(c);
         hand.getChildren().add(new StackPane(tile));
+        lettersRemaining.setText("Letters remaining :" + letters.getPool().size());
 	}
 	
 	private void dump(int index) {		//gives the player 3 new letters while returning the selected one to the letter pool
