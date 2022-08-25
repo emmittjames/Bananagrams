@@ -8,5 +8,7 @@ public class Main {
 
 //TODO:
 //Make a play again function
-//Fix dump
-//Show the amount of letters remaining in the pool
+//Make the players hand able to hold more letters (multi-layered?) [gridpane]
+//Esthetic improvements
+// -pics for buttons
+// -change the color around

@@ -171,12 +171,13 @@ public class Graphics extends Application{
 		return box;
 	}
 	
-	public HBox getHBox() {					//sets the players hand with starting letters
-		HBox box = new HBox(5);
+	public HBox getHBox() {					//sets the player's hand
+		HBox box = new HBox();
 		for(int i=0;i<letters.getCurrLets().size();i++) {	
 			char c = letters.getCurrLets().get(i);
 			Tile tile = makeNewTile(c);
-			box.getChildren().add(new StackPane(tile));
+			StackPane pane = new StackPane(tile);
+			box.getChildren().add(pane);
 		}
 		return box;
 	}
@@ -205,6 +206,7 @@ public class Graphics extends Application{
 				end.setDisable(false);
 			}
 		}
+		lettersRemaining.setText("Letters remaining :" + letters.getPool().size());		//updates letters remaining in pool
 	}
 
 	private Tile makeNewTile(char c) {			//makes a new tile for the player's hand
@@ -255,14 +257,7 @@ public class Graphics extends Application{
 		peel();
 		peel();
 		peel();
-		remove(index);
-	}
-	
-	private void remove(int index) {		//removes the letter at the provided index in the players hand
-		hand.getChildren().remove(index);
-		if(letters.getPool().size()>=3) {
-			dump.setDisable(false);
-		}
+		hand.getChildren().remove(index);		//removes the letter from the player's hand
 	}
 
 	@Override

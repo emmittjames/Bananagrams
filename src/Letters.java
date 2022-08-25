@@ -13,8 +13,8 @@ public class Letters {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
 		//String str = "HELLO";
-		String str = "MUSHROOM";
-		//String str = "ABCDEFGH";
+		//String str = "MUSHROOM";
+		String str = "ABCDEFGH";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
