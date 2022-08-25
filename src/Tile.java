@@ -33,7 +33,7 @@ public class Tile extends Button{
 		return y;
 	}
 	
-	public int getLetter() {
+	public char getLetter() {
 		return letter;
 	}
 	

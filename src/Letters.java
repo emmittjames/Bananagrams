@@ -13,8 +13,8 @@ public class Letters {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
 		//String str = "HELLO";
-		//String str = "MUSHROOM";
-		String str = "ABCDEFGH";
+		String str = "MUSHROOM";
+		//String str = "ABCDEFGH";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
@@ -78,6 +78,10 @@ public class Letters {
 		int index = getIndex(c);
 		letterPool.add(currLetters.remove(index));		//moves dumped letter from hand to pool
 		return index;
+	}
+	
+	public void add(char c) {
+		currLetters.add(c);
 	}
 	
 	public int getIndex(char c) {

@@ -9,4 +9,4 @@ public class Main {
 //TODO:
 //Make a play again function
 //Fix dump
-//Make buttons grayed out while no tile is selected
+//Show the amount of letters remaining in the pool
