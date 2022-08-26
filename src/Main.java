@@ -8,7 +8,6 @@ public class Main {
 
 //TODO:
 //Make a play again function
-//Make the players hand able to hold more letters (multi-layered?) [gridpane]
+//Make the players hand able to hold more letters (multi-layered?) (gridpane?)
 //Esthetic improvements
-// -pics for buttons
 // -change the color around

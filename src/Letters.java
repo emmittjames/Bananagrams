@@ -1,9 +1,5 @@
 import java.util.*;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-
 public class Letters {
 	
 	private ArrayList<Character> letterPool = new ArrayList<Character>();
@@ -12,9 +8,8 @@ public class Letters {
 	public Letters() {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
 		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
-		//String str = "HELLO";
-		//String str = "MUSHROOM";
-		String str = "ABCDEFGH";
+		String str = "MUSHROOM";
+		//String str = "ABCDEFGH";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}

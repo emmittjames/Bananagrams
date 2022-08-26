@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -47,7 +49,7 @@ public class Graphics extends Application{
 		window.getChildren().add(buttons);
 		buttons.setAlignment(Pos.CENTER);
 		
-		hand = getHBox();						//player's hand
+		hand = getHand();						//player's hand
 		window.getChildren().add(hand);
 		hand.setAlignment(Pos.CENTER);
 		
@@ -87,9 +89,14 @@ public class Graphics extends Application{
 	}
 	
 	public HBox getButtons() {		//sets the buttons for the game
-		HBox box = new HBox(5);
+		HBox box = new HBox(20);
 		
-		peel = new Button("Peel");		//peel
+		ImageView peelIcon = new ImageView(new Image("file:peel.jpeg", buttonSize, buttonSize, false, false));		//icons for all the functions
+		ImageView dumpIcon = new ImageView(new Image("file:dump.jpeg", buttonSize, buttonSize, false, false));
+		ImageView deleteIcon = new ImageView(new Image("file:delete.jpeg", buttonSize, buttonSize, false, false));
+		ImageView gameoverIcon = new ImageView(new Image("file:gameover.jpeg", buttonSize, buttonSize, false, false));
+		
+		peel = new Button("",peelIcon);		//peel
 		peel.setDisable(true);
 		peel.setMinWidth(buttonSize);
         peel.setMaxWidth(buttonSize);
@@ -103,7 +110,7 @@ public class Graphics extends Application{
 			noTileSelected();
 		});
 		
-		dump = new Button("Dmp");			//dump
+		dump = new Button("",dumpIcon);			//dump
 		dump.setMinWidth(buttonSize);
         dump.setMaxWidth(buttonSize);
         dump.setMinHeight(buttonSize);
@@ -121,7 +128,7 @@ public class Graphics extends Application{
 			noTileSelected();
 		});
 		
-		del = new Button("Del");			//delete
+		del = new Button("",deleteIcon);			//delete
 		del.setMinWidth(buttonSize);
         del.setMaxWidth(buttonSize);
         del.setMinHeight(buttonSize);
@@ -139,7 +146,7 @@ public class Graphics extends Application{
 			}
 		});
 		
-		end = new Button("End");				//game over
+		end = new Button("",gameoverIcon);				//game over
 		end.setDisable(true);
 		end.setMinWidth(buttonSize);
         end.setMaxWidth(buttonSize);
@@ -171,7 +178,7 @@ public class Graphics extends Application{
 		return box;
 	}
 	
-	public HBox getHBox() {					//sets the player's hand
+	public HBox getHand() {					//sets the player's hand
 		HBox box = new HBox();
 		for(int i=0;i<letters.getCurrLets().size();i++) {	
 			char c = letters.getCurrLets().get(i);
