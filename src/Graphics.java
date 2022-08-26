@@ -195,8 +195,14 @@ public class Graphics extends Application{
 		if(letters.getPool().size()>=3 && !currTile.getPlayed()) {
 			dump.setDisable(false);
 		}
+		else {
+			dump.setDisable(true);
+		}
 		if(tile.getPlayed()) {
 			del.setDisable(false);
+		}
+		else {
+			del.setDisable(true);
 		}
 	}
 	
@@ -274,6 +280,7 @@ public class Graphics extends Application{
 		stage.setTitle("Bananagrams");
 		stage.setScene(scene);
 		stage.setResizable(false);
+		stage.setFullScreen(true);
 		stage.show();
 	}
 	
