@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -35,11 +36,12 @@ public class Graphics extends Application{
 	
 	private Parent setGame() {		//sets all the elements for the game
 		window = new VBox(20);
-		window.setPrefSize(800,600);
+		window.setPrefSize(99999,99999);	//game fills the screen without being full screen
 		window.setPadding(new Insets(15, 15, 15, 15));
 		
 		window.getChildren().add(lettersRemaining);
 		lettersRemaining.setTextAlignment(TextAlignment.CENTER);
+		lettersRemaining.setFont(new Font(25));
 		
 		GridPane grid = getGridPane();		//grid
 		window.getChildren().add(grid);
@@ -219,7 +221,11 @@ public class Graphics extends Application{
 				end.setDisable(false);
 			}
 		}
-		lettersRemaining.setText("Letters remaining :" + letters.getPool().size());		//updates letters remaining in pool
+		else {
+			peel.setDisable(true);
+			end.setDisable(true);
+		}
+		lettersRemaining.setText("Letters remaining: " + letters.getPool().size());		//updates letters remaining in pool
 	}
 
 	private Tile makeNewTile(char c) {			//makes a new tile for the player's hand
@@ -280,7 +286,7 @@ public class Graphics extends Application{
 		stage.setTitle("Bananagrams");
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setFullScreen(true);
+		//stage.setFullScreen(true);
 		stage.show();
 	}
 	
