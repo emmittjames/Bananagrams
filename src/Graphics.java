@@ -155,25 +155,27 @@ public class Graphics extends Application{
         end.setMinHeight(buttonSize);
         end.setMaxHeight(buttonSize);
 		end.setOnAction(e -> {
-			String str;
-			if(game.gameOver()) {			//checks all words on the board and gives a win if all words are valid
-				str = "You won";
+			if(letters.availableEnd()) {
+				String str;
+				if(game.gameOver()) {			//checks all words on the board and gives a win if all words are valid
+					str = "You won";
+				}
+				else {
+					str = "You lost";
+				}
+				ButtonType playAgain = new ButtonType("Play Again [doesn't work]");
+				ButtonType exit = new ButtonType("Exit");
+				Alert a = new Alert(AlertType.NONE, str, playAgain, exit);		//gives an alert when the game ends to exit or play again
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get() == exit) {
+					System.out.println("close");
+					System.exit(0);
+				}
+				if(result.get() == playAgain) {
+					System.out.println("play again");
+				}
+				System.out.println("test");
 			}
-			else {
-				str = "You lost";
-			}
-			ButtonType playAgain = new ButtonType("Play Again [doesn't work]");
-			ButtonType exit = new ButtonType("Exit");
-			Alert a = new Alert(AlertType.NONE, str, playAgain, exit);		//gives an alert when the game ends to exit or play again
-			Optional<ButtonType> result = a.showAndWait();
-			if(result.get() == exit) {
-				System.out.println("close");
-				System.exit(0);
-			}
-			if(result.get() == playAgain) {
-				System.out.println("play again");
-			}
-			System.out.println("test");
 		});
 		
 		box.getChildren().addAll(peel,dump,del,end);		//adds the buttons to the window

@@ -117,4 +117,10 @@ public class Letters {
 			return true;
 		return false;
 	}
+	
+	public boolean availableEnd() {
+		if(currLetters.size()==0 && letterPool.size()==0)
+			return true;
+		return false;
+	}
 }

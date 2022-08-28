@@ -9,6 +9,5 @@ public class Main {
 //TODO:
 //Make a play again function
 //Make the players hand able to hold more letters (multi-layered?) (gridpane?)
-//Gameover needs to update
 //Esthetic improvements
 // -change the color around
