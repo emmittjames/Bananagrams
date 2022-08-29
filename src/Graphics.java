@@ -21,20 +21,27 @@ import javafx.stage.Stage;
 
 public class Graphics extends Application{
 	
-	private Game game = new Game();
-	private Letters letters = game.getLets();
-	private Board board = game.getBoard();
+	private Game game;							//game that runs in the background
+	private Letters letters;					//letters that run in the background
+	private Board board;						//board that runs in the background
 	
 	private VBox window;						//vbox that contains everything
-	private GridPane grid = new GridPane();		//grid for the board
-	private boolean initClick = false;			//false when no letter is selected, true when a letter is selected
+	private GridPane grid;						//grid for the board
+	private boolean initClick;					//false when no letter is selected, true when a letter is selected
 	private Tile currTile;						//current selected tile
 	private HBox hand;							//players hand
 	private int buttonSize = 37;				//sets the size of all the buttons (board, hand, and functions)
 	private Button peel, end, dump, del;		//buttons for all the functions
-	private Text lettersRemaining = new Text("Letters remaining: " + letters.getPool().size());
+	private Text lettersRemaining;				//Letters remaining in the pool
 	
 	private Parent setGame() {		//sets all the elements for the game
+		game = new Game();
+		letters = game.getLets();		//Sets the game, letters, and board that run in the background
+		board = game.getBoard();
+		
+		initClick = false;
+		lettersRemaining = new Text("Letters remaining: " + letters.getPool().size());
+		
 		window = new VBox(20);
 		window.setPrefSize(99999,99999);	//game fills the screen without being full screen
 		window.setPadding(new Insets(15, 15, 15, 15));
@@ -43,7 +50,8 @@ public class Graphics extends Application{
 		lettersRemaining.setTextAlignment(TextAlignment.CENTER);
 		lettersRemaining.setFont(new Font(25));
 		
-		GridPane grid = getGridPane();		//grid
+		grid = new GridPane();		//grid
+		setGridPane();
 		window.getChildren().add(grid);
 		grid.setAlignment(Pos.CENTER);
 		
@@ -58,15 +66,13 @@ public class Graphics extends Application{
 		return window;
 	}
 	
-	public GridPane getGridPane() {		//sets the board
+	public void setGridPane() {		//sets the board
 		grid.setPrefSize(300, 300);
-
         for (int i = 0; i < board.getDimensions(); i++) {
             for (int j = 0; j < board.getDimensions(); j++) {
                 setNewButton(j,i);
             }
         }
-        return grid;
 	}
 	
 	private void setNewButton(int j, int i) {		//sets all the buttons on the board
@@ -163,18 +169,17 @@ public class Graphics extends Application{
 				else {
 					str = "You lost";
 				}
-				ButtonType playAgain = new ButtonType("Play Again [doesn't work]");
+				ButtonType playAgain = new ButtonType("Play Again");
 				ButtonType exit = new ButtonType("Exit");
 				Alert a = new Alert(AlertType.NONE, str, playAgain, exit);		//gives an alert when the game ends to exit or play again
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get() == exit) {
-					System.out.println("close");
 					System.exit(0);
 				}
-				if(result.get() == playAgain) {
+				else if(result.get() == playAgain) {
 					System.out.println("play again");
+					restart();
 				}
-				System.out.println("test");
 			}
 		});
 		
@@ -280,6 +285,15 @@ public class Graphics extends Application{
 		peel();
 		hand.getChildren().remove(index);		//removes the letter from the player's hand
 	}
+	
+	private void restart(){
+		Stage stage = new Stage();
+		Scene scene = new Scene(setGame());
+		stage.setTitle("Bananagrams");
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.show();
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -288,7 +302,6 @@ public class Graphics extends Application{
 		stage.setTitle("Bananagrams");
 		stage.setScene(scene);
 		stage.setResizable(false);
-		//stage.setFullScreen(true);
 		stage.show();
 	}
 	
