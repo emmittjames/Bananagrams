@@ -34,6 +34,8 @@ public class Graphics extends Application{
 	private Button peel, end, dump, del;		//buttons for all the functions
 	private Text lettersRemaining;				//Letters remaining in the pool
 	
+	private Stage stage;
+	
 	private Parent setGame() {		//sets all the elements for the game
 		game = new Game();
 		letters = game.getLets();		//Sets the game, letters, and board that run in the background
@@ -178,6 +180,7 @@ public class Graphics extends Application{
 				}
 				else if(result.get() == playAgain) {
 					System.out.println("play again");
+					stage.close();
 					restart();
 				}
 			}
@@ -287,7 +290,7 @@ public class Graphics extends Application{
 	}
 	
 	private void restart(){
-		Stage stage = new Stage();
+		stage = new Stage();
 		Scene scene = new Scene(setGame());
 		stage.setTitle("Bananagrams");
 		stage.setScene(scene);
@@ -297,7 +300,7 @@ public class Graphics extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Stage stage = primaryStage;
+		stage = primaryStage;
 		Scene scene = new Scene(setGame());
 		stage.setTitle("Bananagrams");
 		stage.setScene(scene);
