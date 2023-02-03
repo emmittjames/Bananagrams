@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Dictionary {
 	
-	Hashtable<String,String> dictionary;
+	private Hashtable<String,String> dictionary;
 	
 	public Dictionary() {	//creates a hashmap with all words in the dictionary text file (words.txt)
 		dictionary = new Hashtable<String,String>();

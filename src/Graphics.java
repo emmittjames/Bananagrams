@@ -101,10 +101,10 @@ public class Graphics extends Application{
 	public HBox getButtons() {		//sets the buttons for the game
 		HBox box = new HBox(20);
 		
-		ImageView peelIcon = new ImageView(new Image("file:peel.jpeg", buttonSize, buttonSize, false, false));		//icons for all the functions
-		ImageView dumpIcon = new ImageView(new Image("file:dump.jpeg", buttonSize, buttonSize, false, false));
-		ImageView deleteIcon = new ImageView(new Image("file:delete.jpeg", buttonSize, buttonSize, false, false));
-		ImageView gameoverIcon = new ImageView(new Image("file:gameover.jpeg", buttonSize, buttonSize, false, false));
+		ImageView peelIcon = new ImageView(new Image("file:images/peel.jpeg", buttonSize, buttonSize, false, false));		//icons for all the functions
+		ImageView dumpIcon = new ImageView(new Image("file:images/dump.jpeg", buttonSize, buttonSize, false, false));
+		ImageView deleteIcon = new ImageView(new Image("file:images/delete.jpeg", buttonSize, buttonSize, false, false));
+		ImageView gameoverIcon = new ImageView(new Image("file:images/gameover.jpeg", buttonSize, buttonSize, false, false));
 		
 		peel = new Button("",peelIcon);		//peel
 		peel.setDisable(true);

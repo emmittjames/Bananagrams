@@ -7,14 +7,14 @@ public class Letters {
 	
 	public Letters() {
 		//String str = "AAAAAAAAAAAAABBBCCCDDDDDDEEEEEEEEEEEEEEEEEEFFFGGGGHHHIIIIIIIIIIIIJJKKLLLLLMMMNNNNNNNNOOOOOOOOOOOPPPQQRRRRRRRRRSSSSSSTTTTTTTTTUUUUUUVVVWWWXXYYYZZ";
-		//String str = "AABBCCDDEEFFGGHIIJKLMNNOOPQRRSSTTUVWXYZ";
-		//String str = "MUSHROOM";
-		String str = "ABCDEF";
+		//String str = "EEEEEEEEEAAAAAAIIIIIIOOOOOTTTTRRRRNNNNDDDSSSUUULLGGBBCCFFHHMMPPVWYJKQXZ";
+		String str = "EEEEEAAAIIIOOTRRNNDDSULGBCFPVZ";
+		//String str = "HELLO";
 		for(int i=0;i<str.length();i++) {
 			letterPool.add(str.charAt(i));
 		}
-		//startingLetters(21);
-		startingLetters(3);
+		startingLetters(21);
+		//startingLetters(3);
 	}
 	
 	public void remove(char c) {		//puts a letter back into the players hand
