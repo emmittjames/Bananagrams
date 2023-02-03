@@ -8,7 +8,7 @@ public class Dictionary {
 	public Dictionary() {	//creates a hashmap with all words in the dictionary text file (words.txt)
 		dictionary = new Hashtable<String,String>();
 		try {
-			File f = new File("words.txt");
+			File f = new File("src/words.txt");
 			String path = f.getAbsolutePath();	
 			BufferedReader in = new BufferedReader(new FileReader(path));
 			String line;
@@ -28,5 +28,10 @@ public class Dictionary {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void main(String[]args) {
+		Dictionary d = new Dictionary();
+		System.out.println(d.isWord("asdasdvf"));
 	}
 }
