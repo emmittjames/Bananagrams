@@ -1,9 +1,10 @@
 # Bananagrams
 
 ## Table of contents
-* [General info](#general-info)
+* [General Info](#general-info)
 * [Technologies](#technologies)
 * [Cloning](#cloning)
+* [Sample Images](#sample-images)
 
 ## General info
 This desktop application will allow a user to play a mimic of the Bananagrams word game.
