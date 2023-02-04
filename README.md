@@ -6,7 +6,7 @@
 * [Cloning](#cloning)
 * [Sample Images](#sample-images)
 
-## General info
+## General Info
 This desktop application will allow a user to play a mimic of the Bananagrams word game.
 #### Rules for playing: [https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started](https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started)
 	
