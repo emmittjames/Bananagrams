@@ -35,4 +35,5 @@ Project created with:
 <img width="1440" alt="PlayingGame" src="https://user-images.githubusercontent.com/90576219/216736315-ab60712f-54eb-460b-8711-5501585b3071.png">
 
 #### Finishing a game
-<img width="1440" alt="FinishedGame" src="https://user-images.githubusercontent.com/90576219/216736324-8383553a-7c5f-4487-8c4d-ea9d72f51d49.png">
+<img width="1440" alt="FinishedGame" src="https://user-images.githubusercontent.com/90576219/216736807-1574f41a-c320-4b0d-a8b3-6831c9e04d2b.png">
+
