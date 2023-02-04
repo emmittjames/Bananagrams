@@ -26,7 +26,7 @@ Project created with:
 &nbsp;&nbsp;&nbsp;&nbsp;  -If you see a version error, it means you are running an outdated JDK version.\
 4. Everything should be up and running!
 
-## Sample Images:
+## Sample Images
 
 #### Starting a game
 <img width="1440" alt="StartingGame" src="https://user-images.githubusercontent.com/90576219/216736305-b9825cf8-399c-4dca-8c92-3132e876ab47.png">
