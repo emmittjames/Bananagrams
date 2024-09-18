@@ -7,7 +7,7 @@
 * [Sample Images](#sample-images)
 
 ## General Info
-This desktop application will allow a user to play a mimic of the Bananagrams word game.
+This desktop application will allow a user to play a single-player mimic of the Bananagrams word game.
 #### Rules for playing: [https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started](https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started)
 	
 ## Technologies
@@ -22,9 +22,8 @@ Project created with:
 ``` 
 --module-path "PATH/TO/YOUR/JAVAFX/LIB/FOLDER" --add-modules javafx.controls,javafx.fxml
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;  -If you see "Error: JavaFX runtime components are missing, and are required to run this application", it means that you didn't include \
-&nbsp;&nbsp;&nbsp;&nbsp; these VM arguments properly.\
-&nbsp;&nbsp;&nbsp;&nbsp;  -If you see a version error, it means you are running an outdated JDK version.\
+- If you see `Error: JavaFX runtime components are missing, and are required to run this application` it means you didn't include these VM arguments properly.
+- If you see a version error it means you are running an outdated JDK version.
 4. Everything should be up and running!
 
 ## Sample Images
