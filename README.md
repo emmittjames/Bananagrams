@@ -7,7 +7,7 @@
 * [Sample Images](#sample-images)
 
 ## General Info
-This desktop application will allow a user to play a single-player mimic of the Bananagrams word game.
+This project is a desktop application that offers a solitaire version of the Bananagrams word game, challenging users to form a complete crossword grid with all the tiles.
 #### Rules for playing: [https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started](https://bananagrams.com/blogs/news/how-to-play-bananagrams-instructions-for-getting-started)
 	
 ## Technologies
